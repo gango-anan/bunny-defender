@@ -21,11 +21,11 @@ const config = {
 function preload() {
   this.load.image('titleBg', 'assets/images/TitleBG.png');
   this.load.image('titleImage', 'assets/images/TitleImage.png');
-  this.load.image('titleBg', 'assets/images/explosion.png');
-  this.load.image('titleBg', 'assets/images/ghost.png');
-  this.load.image('titleBg', 'assets/images/hill.png');
-  this.load.image('titleBg', 'assets/images/loader_bar.png');
-  this.load.image('titleBg', 'assets/images/sky.png');
+  this.load.image('explosion', 'assets/images/explosion.png');
+  this.load.image('ghost', 'assets/images/ghost.png');
+  this.load.image('hill', 'assets/images/hill.png');
+  this.load.image('loaderBar', 'assets/images/loader_bar.png');
+  this.load.image('sky', 'assets/images/sky.png');
 }
 
 function create() {

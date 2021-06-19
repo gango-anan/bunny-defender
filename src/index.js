@@ -20,6 +20,8 @@ const config = {
 
 let player;
 let cursors;
+let score = 0;
+let scoreText;
 
 function preload() {
   this.load.image('titleBg', 'assets/images/TitleBG.png');
@@ -36,7 +38,6 @@ function create() {
   this.add.image(0, 0, 'titleBg').setOrigin(0,0);
 
   player = this.physics.add.sprite(270, 786, 'dude');
-  player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
   this.anims.create({
@@ -60,6 +61,9 @@ function create() {
   });
 
   cursors = this.input.keyboard.createCursorKeys();
+
+  scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+  
 }
 
 function update() {

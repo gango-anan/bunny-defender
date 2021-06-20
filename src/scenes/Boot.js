@@ -4,8 +4,8 @@ export default class Boot extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('preloaderBar', 'assets/images/loader_bar.png');
     this.load.image('titleImage', 'assets/images/TitleImage.png');
+    this.load.image('preloaderBar', 'assets/images/loader_bar.png');
   }
 
   create() {

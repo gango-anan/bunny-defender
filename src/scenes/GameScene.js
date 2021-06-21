@@ -30,7 +30,25 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-
+  assignBunnyMovement(b) {
+    const bposition = Math.floor(Phaser.Math.Between(50, this.game.renderer.width-50));
+    const bdelay = Phaser.Math.Between(2000, 6000);
+    if(bposition < b.x){
+        b.setFlipX(true);
+    }
+    else{
+        b.setFlipX(false);
+    }
+    const t = this.tweens.add({
+      targets: b,
+      x: bposition,
+      duration: 3500,
+      ease: 'Linear',
+      repeat: -1,
+ 
+      delay: bdelay,
+    });
+  }
 
   update() {}
 

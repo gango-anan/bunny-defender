@@ -36,10 +36,11 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('sky', 'assets/images/sky.png');
     this.load.image('optionsBtn', 'assets/images/options_button.png');
     this.load.image('playBtn', 'assets/images/play_button.png');
-    this.load.spritesheet('bunny', "./assets/images/spritesheets/bunny.png", {
+    this.load.spritesheet('bunny', "assets/images/spritesheets/bunny.png", {
       frameHeight: 70,
       frameWidth: 64
     });
+    this.load.atlasXML('bunnyAtlas', 'assets/images/spritesheets/bunny.png', 'assets/images/spritesheets/bunny.xml')
     this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
     
     for(let i = 0; i<200; i++) {

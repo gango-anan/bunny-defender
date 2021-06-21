@@ -1,3 +1,5 @@
+import GameScene from "./GameScene";
+
 export default class Title extends Phaser.Scene {
   constructor() {
     super('Title');
@@ -34,7 +36,7 @@ export default class Title extends Phaser.Scene {
     })
 
     playButton.on('pointerup', () => {
-      
+      this.scene.add('GameScene', GameScene, true);
     })
   }
 } 

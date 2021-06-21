@@ -1,3 +1,5 @@
+import Title from "./Title";
+
 export default class Preloader extends Phaser.Scene {
   constructor() {
     super('Preloader');
@@ -32,12 +34,20 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('hill', 'assets/images/hill.png');
     this.load.image('loaderBar', 'assets/images/loader_bar.png');
     this.load.image('sky', 'assets/images/sky.png');
-    for(let i = 0; i<1000; i++) {
+    this.load.image('optionsBtn', 'assets/images/options_button.png');
+    this.load.image('playBtn', 'assets/images/play_button.png');
+    this.load.spritesheet('bunny', "./assets/images/spritesheets/bunny.png", {
+      frameHeight: 70,
+      frameWidth: 64
+    });
+    this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
+    
+    for(let i = 0; i<200; i++) {
       this.load.image('logo'+i, 'assets/images/TitleImage.png');
     }
   }
 
   create() {
-    this.add.image(0, 0, 'titleBg').setOrigin(0,0);
+    this.scene.add('Title', Title, true);
   }
 }

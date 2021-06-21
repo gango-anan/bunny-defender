@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Boot from './scenes/Boot';
 import Preloader from './scenes/Preloader';
+import Title from './scenes/Title';
 
 const config = {
   type: Phaser.AUTO,

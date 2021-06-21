@@ -13,7 +13,7 @@ const config = {
   physics: {
     default: 'arcade'
   },
-  scene: [Boot, Preloader],
+  scene: [Boot, Preloader]
 }
 
 const game = new Phaser.Game(config);

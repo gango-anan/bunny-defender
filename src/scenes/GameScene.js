@@ -6,6 +6,7 @@ export default class GameScene extends Phaser.Scene {
     this.totalSpaceRocks;
     this.spaceRockGroups;
     this.gameover;
+    this.burst;
   }
 
   create() {
@@ -21,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(270, 780, 'hill');
     this.add.image(270, 880, 'hill');
     this.buildBunnies();
+    this.buildEmitter();
   }
 
   buildBunnies() {
@@ -97,6 +99,20 @@ export default class GameScene extends Phaser.Scene {
       rock.setGravityY(Phaser.Math.Between(50, 150));
       rock.setVelocityY(Phaser.Math.Between(200, 400));
     }
+  }
+
+  buildEmitter() {
+    const particles = this.add.particles('explosion');
+    this.burst = particles.createEmitter({ 
+      x: 0,
+      y: 0,
+      quantity: 80,
+      speed: { min: { min: -30, max: 30 }, max: { min: 30, max: -30 } },
+      scale: { start: 0.3, end: 1.2 },
+    });
+    this.input.on('pointerdown', function(pointer){
+      console.log("Mouse Events.");
+    }, this);
   }
 
   update() {}

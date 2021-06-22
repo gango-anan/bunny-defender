@@ -3,11 +3,15 @@ export default class GameScene extends Phaser.Scene {
     super('GameScene');
     this.totalBunnies;
     this.bunnyGroup;
+    this.totalSpaceRocks;
+    this.spaceRockGroups;
   }
 
   create() {
     this.totalBunnies = 20;
+    this.totalSpaceRocks = 13;
     this.buildWorld();
+    this.buildSpaceRocks();
   }
 
   buildWorld = ()=> {
@@ -51,6 +55,23 @@ export default class GameScene extends Phaser.Scene {
     });
   }
 
-  update() {}
+  buildSpaceRocks() {
+    this.spaceRockGroup = this.add.group();
+    let spaceRockAtlasTexture = this.textures.get('spaceRock');
+    let frames = spaceRockAtlasTexture.getFrameNames();
+    for(let i=0; i<this.totalSpaceRocks; i++) {
+      const xCord = Phaser.Math.Between(0, this.game.renderer.width);
+      const yCord = Phaser.Math.Between(50, 100);
+      const rock = this.spaceRockGroup.create(xCord, yCord, 'spaceRock', frames[i]);
+      const scale = Phaser.Math.FloatBetween(0.3, 1.0);
+      rock.scaleX = scale;
+      rock.scaleY = scale;
+      this.physics.world.enable(rock);
+      const rockBody = rock.body;
+      rockBody.setGravityY(Phaser.Math.Between(50, 150));
+      rockBody.setVelocityY(Phaser.Math.Between(200, 400));
+    }
+  }
 
+  update() {}
 }

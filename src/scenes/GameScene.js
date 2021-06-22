@@ -26,6 +26,7 @@ export default class GameScene extends Phaser.Scene {
       let x = Phaser.Math.Between(-10, this.game.renderer.width-50);
       let y = Phaser.Math.Between(this.game.renderer.height-180, this.game.renderer.height-60);
       let b = this.bunnyGroup.create(x, y, 'bunnyAtlas',frames[i]);
+      b.setOrigin(0.5, 0.5);
       this.assignBunnyMovement(b);
     }
   }
@@ -34,10 +35,10 @@ export default class GameScene extends Phaser.Scene {
     const bposition = Math.floor(Phaser.Math.Between(50, this.game.renderer.width-50));
     const bdelay = Phaser.Math.Between(2000, 6000);
     if(bposition < b.x){
-        b.setFlipX(true);
+      b.setFlipX(true);
     }
     else{
-        b.setFlipX(false);
+      b.setFlipX(false);
     }
     const t = this.tweens.add({
       targets: b,

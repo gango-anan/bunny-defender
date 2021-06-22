@@ -1,8 +1,6 @@
 import Phaser from 'phaser';
 import Boot from './scenes/Boot';
-import GameScene from './scenes/GameScene';
 import Preloader from './scenes/Preloader';
-import Title from './scenes/Title';
 
 const config = {
   type: Phaser.AUTO,
@@ -13,7 +11,10 @@ const config = {
     mode: Phaser.Scale.FIT
   },
   physics: {
-    default: 'arcade'
+    default: 'arcade',
+    arcade: {
+      //gravity: { y: 150 }
+    }
   },
   scene: [Boot, Preloader]
 }

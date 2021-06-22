@@ -42,6 +42,7 @@ export default class Preloader extends Phaser.Scene {
     });
     this.load.atlasXML('bunnyAtlas', 'assets/images/spritesheets/bunny.png', 'assets/images/spritesheets/bunny.xml')
     this.load.atlasXML('spaceRock', 'assets/images/spritesheets/SpaceRock.png', 'assets/images/spritesheets/SpaceRock.xml');
+    this.load.image('explosion', 'assets/images/explosion.png');
     this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
     
     for(let i = 0; i<200; i++) {

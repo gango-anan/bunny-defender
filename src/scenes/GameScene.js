@@ -70,6 +70,13 @@ export default class GameScene extends Phaser.Scene {
       const rockBody = rock.body;
       rockBody.setGravityY(Phaser.Math.Between(50, 150));
       rockBody.setVelocityY(Phaser.Math.Between(200, 400));
+      rock.anims.create({
+        key: 'Fall',
+        frameRate: 24,
+        repeat: -1,
+        frames: this.anims.generateFrameNames('spaceRock', { prefix: 'SpaceRock', start: 0, end: 49, zeroPad: 1 })
+      });
+      rock.play('Fall');
     }
   }
 

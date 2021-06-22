@@ -61,11 +61,12 @@ export default class GameScene extends Phaser.Scene {
     let frames = spaceRockAtlasTexture.getFrameNames();
     for(let i=0; i<this.totalSpaceRocks; i++) {
       const xCord = Phaser.Math.Between(0, this.game.renderer.width);
-      const yCord = Phaser.Math.Between(50, 100);
+      const yCord = Phaser.Math.Between(-1500, 0);
       const rock = this.spaceRockGroup.create(xCord, yCord, 'spaceRock', frames[i]);
       const scale = Phaser.Math.FloatBetween(0.3, 1.0);
       rock.scaleX = scale;
       rock.scaleY = scale;
+      console.log(rock.y);
       this.physics.world.enable(rock);
       const rockBody = rock.body;
       rockBody.setGravityY(Phaser.Math.Between(50, 150));

@@ -5,9 +5,11 @@ export default class GameScene extends Phaser.Scene {
     this.bunnyGroup;
     this.totalSpaceRocks;
     this.spaceRockGroups;
+    this.gameover;
   }
 
   create() {
+    this.gameover = false;
     this.totalBunnies = 20;
     this.totalSpaceRocks = 13;
     this.buildWorld();
@@ -61,12 +63,11 @@ export default class GameScene extends Phaser.Scene {
     let frames = spaceRockAtlasTexture.getFrameNames();
     for(let i=0; i<this.totalSpaceRocks; i++) {
       const xCord = Phaser.Math.Between(0, this.game.renderer.width);
-      const yCord = Phaser.Math.Between(-1500, 0);
+      const yCord = Phaser.Math.Between(-1800, 0);
       const rock = this.spaceRockGroup.create(xCord, yCord, 'spaceRock', frames[i]);
       const scale = Phaser.Math.FloatBetween(0.3, 1.0);
       rock.scaleX = scale;
       rock.scaleY = scale;
-      console.log(rock.y);
       this.physics.world.enable(rock);
       const rockBody = rock.body;
       rockBody.setGravityY(Phaser.Math.Between(50, 150));
@@ -78,6 +79,23 @@ export default class GameScene extends Phaser.Scene {
         frames: this.anims.generateFrameNames('spaceRock', { prefix: 'SpaceRock', start: 0, end: 49, zeroPad: 1 })
       });
       rock.play('Fall');
+      rockBody.setCollideWorldBounds(true);
+      rockBody.onWorldBounds =true;
+      rockBody.world.on('worldbounds', this.resetRock, this);
+    }
+  }
+
+  resetRock(rock) {
+    if(rock.y > this.game.renderer.height - 260) {
+      this.reSpawnRock(rock);   
+    }
+  }
+
+  reSpawnRock(rock) {
+    if(this.gameover == false){
+      rock.reset(Phaser.Math.Between(0, this.game.renderer.width), Phaser.Math.Between(-1800, 0));
+      rock.setGravityY(Phaser.Math.Between(50, 150));
+      rock.setVelocityY(Phaser.Math.Between(200, 400));
     }
   }
 

@@ -104,15 +104,20 @@ export default class GameScene extends Phaser.Scene {
   buildEmitter() {
     const particles = this.add.particles('explosion');
     this.burst = particles.createEmitter({ 
-      x: 0,
-      y: 0,
+      x: -500,
+      y: -500,
       quantity: 80,
-      speed: { min: { min: -30, max: 30 }, max: { min: 30, max: -30 } },
+      speed: { min: Phaser.Math.Between(-60, 60), max: Phaser.Math.Between(60, -60) },
       scale: { start: 0.3, end: 1.2 },
     });
-    this.input.on('pointerdown', function(pointer){
-      console.log("Mouse Events.");
-    }, this);
+    this.input.on('pointerdown', this.fireBurst, this);
+  }
+
+  fireBurst(pointer) {
+    if(this.gameover === false){
+      this.burst.emitParticleAt(pointer.x, pointer.y)
+      this.burst.start(true, 1000, null, 20);
+    }
   }
 
   update() {}

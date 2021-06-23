@@ -4,7 +4,7 @@ export default class GameScene extends Phaser.Scene {
     this.totalBunnies;
     this.bunnyGroup;
     this.totalSpaceRocks;
-    this.spaceRockGroups;
+    this.spaceRockGroup;
     this.gameover;
     this.burst;
   }
@@ -14,7 +14,6 @@ export default class GameScene extends Phaser.Scene {
     this.totalBunnies = 20;
     this.totalSpaceRocks = 13;
     this.buildWorld();
-    this.buildSpaceRocks();
   }
 
   buildWorld = ()=> {
@@ -22,6 +21,7 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(270, 780, 'hill');
     this.add.image(270, 880, 'hill');
     this.buildBunnies();
+    this.buildSpaceRocks();
     this.buildEmitter();
   }
 
@@ -35,6 +35,8 @@ export default class GameScene extends Phaser.Scene {
       let y = Phaser.Math.Between(this.game.renderer.height-180, this.game.renderer.height-60);
       let b = this.bunnyGroup.create(x, y, 'bunnyAtlas',frames[i]);
       b.setOrigin(0.5, 0.5);
+      this.physics.world.enable(b);
+      b.body.moves = false;
       this.assignBunnyMovement(b);
     }
   }
@@ -61,6 +63,7 @@ export default class GameScene extends Phaser.Scene {
 
   buildSpaceRocks() {
     this.spaceRockGroup = this.add.group();
+    this.spaceRockGroup.enableBody = true;
     let spaceRockAtlasTexture = this.textures.get('spaceRock');
     let frames = spaceRockAtlasTexture.getFrameNames();
     for(let i=0; i<this.totalSpaceRocks; i++) {
@@ -82,7 +85,7 @@ export default class GameScene extends Phaser.Scene {
       });
       rock.play('Fall');
       rockBody.setCollideWorldBounds(true);
-      rockBody.onWorldBounds =true;
+      rockBody.onWorldBounds = true;
       rockBody.world.on('worldbounds', this.resetRock, this);
     }
   }
@@ -94,7 +97,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   reSpawnRock(rock) {
-    if(this.gameover == false){
+    if(this.gameover === false){
       rock.reset(Phaser.Math.Between(0, this.game.renderer.width), Phaser.Math.Between(-1800, 0));
       rock.setGravityY(Phaser.Math.Between(50, 150));
       rock.setVelocityY(Phaser.Math.Between(200, 400));
@@ -115,10 +118,30 @@ export default class GameScene extends Phaser.Scene {
 
   fireBurst(pointer) {
     if(this.gameover === false){
-      this.burst.emitParticleAt(pointer.x, pointer.y)
+      this.burst.emitParticleAt(pointer.x, pointer.y);
       this.burst.start(true, 1000, null, 20);
     }
   }
 
-  update() {}
+  burstCollision(r, b) {
+    this.reSpawnRock(r);
+  }
+
+  bunnyCollision(r, b) {
+    if(b.active) {
+      b.destroy();
+      this.totalBunnies--;
+      this.checkBunniesLeft();
+    }
+  }
+
+  checkBunniesLeft() {
+    if(this.totalBunnies <= 0) {
+      this.gameover = true;
+    }
+  }
+
+  update() {
+    this.physics.add.overlap(this.spaceRockGroup, this.bunnyGroup, this.bunnyCollision, null, this);
+  }
 }

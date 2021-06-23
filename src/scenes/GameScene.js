@@ -129,6 +129,7 @@ export default class GameScene extends Phaser.Scene {
 
   bunnyCollision(r, b) {
     if(b.active) {
+      this.makeGhost(b);
       b.destroy();
       this.totalBunnies--;
       this.checkBunniesLeft();
@@ -139,6 +140,16 @@ export default class GameScene extends Phaser.Scene {
     if(this.totalBunnies <= 0) {
       this.gameover = true;
     }
+  }
+
+  makeGhost(b) {
+    const bunnyGhost = this.add.sprite(b.x-20, b.y-180, 'ghost');
+    bunnyGhost.setOrigin(0.5, 0.5);
+    bunnyGhost.scaleX = b.scaleX;
+    this.physics.world.enable(bunnyGhost);
+    bunnyGhost.enableBody = true;
+    bunnyGhost.onWorldBounds = true
+    bunnyGhost.body.setVelocityY(-800);
   }
 
   update() {

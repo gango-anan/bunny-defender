@@ -37,6 +37,19 @@ export default class GameScene extends Phaser.Scene {
       b.setOrigin(0.5, 0.5);
       this.physics.world.enable(b);
       b.body.moves = false;
+      b.anims.create({
+        key: 'Rest',
+        frameRate: 24,
+        repeat: -1,
+        frames: this.anims.generateFrameNames('bunnyAtlas', { prefix: 'Bunny', start: 1, end: 58, zeroPad: 1 })
+      });
+      b.anims.create({
+        key: 'Walk',
+        frameRate: 24,
+        repeat: -1,
+        frames: this.anims.generateFrameNames('bunnyAtlas', { prefix: 'Bunny', start: 68, end: 106, zeroPad: 1 })
+      });
+      b.play('Rest');
       this.assignBunnyMovement(b);
     }
   }
@@ -53,8 +66,8 @@ export default class GameScene extends Phaser.Scene {
     const t = this.tweens.add({
       targets: b,
       x: bposition,
-      duration: 3500,
-      ease: 'Linear',
+      duration: 3000,
+      ease: 'Quad.easeInOut',
       repeat: -1,
  
       delay: bdelay,

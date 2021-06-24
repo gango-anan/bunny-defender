@@ -11,6 +11,28 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
 	}
 }
 
+class LaserGroup extends Phaser.Physics.Arcade.Group {
+	constructor(scene) {
+		super(scene.physics.world, scene);
+
+		this.createMultiple({
+			frameQuantity: 30,
+			key: 'laser',
+			active: false,
+			visible: false,
+			classType: Laser
+		});
+	}
+
+	fireBullet(x, y) {
+		const laser = this.getFirstDead(false);
+
+		if(laser) {
+			laser.fire(x, y);
+		}
+	}
+}
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');

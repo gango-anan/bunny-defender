@@ -19,9 +19,9 @@ export default class Title extends Phaser.Scene {
       frames: this.anims.generateFrameNumbers('bunny', {frames: [0,1,2,3,4,5,6,7]})
     })
 
-    // this.sound.play('bgAudio', {
-    //   loop: true
-    // })
+    this.sound.play('bgAudio', {
+      loop: true
+    })
 
     playButton.setInteractive({useHandCursor: true});
     playButton.on('pointerover', () => {

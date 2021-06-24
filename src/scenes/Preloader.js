@@ -47,6 +47,9 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('laser', 'assets/images/bullet.png');
     this.load.image('player', 'assets/images/player.png');
     this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
+    this.load.audio('explosion', 'assets/audio/explosion.mp3');
+    this.load.audio('select', 'assets/audio/select.mp3');
+    this.load.audio('hurt', 'assets/audio/hurt.mp3');
     
     for(let i = 0; i<100; i++) {
       this.load.image('logo'+i, 'assets/images/TitleImage.png');

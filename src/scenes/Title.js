@@ -37,6 +37,7 @@ export default class Title extends Phaser.Scene {
 
     playButton.on('pointerup', () => {
       this.scene.add('GameScene', GameScene, true);
+      this.scene.remove('Title');
     })
   }
 } 

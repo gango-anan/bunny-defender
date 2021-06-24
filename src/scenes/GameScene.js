@@ -1,86 +1,81 @@
-class Laser extends Phaser.Physics.Arcade.Sprite {
-	constructor(scene, x, y) {
-		super(scene, x, y, 'laser');
-	}
-
-	fire(x, y) {
-		this.body.reset(x, y);
-		this.setActive(true);
-		this.setVisible(true);
-		this.setVelocityY(-900);
-	}
-}
-
-class LaserGroup extends Phaser.Physics.Arcade.Group {
-	constructor(scene) {
-		super(scene.physics.world, scene);
-
-		this.createMultiple({
-			frameQuantity: 30,
-			key: 'laser',
-			active: false,
-			visible: false,
-			classType: Laser
-		});
-	}
-
-	fireBullet(x, y) {
-		const laser = this.getFirstDead(false);
-
-		if(laser) {
-			laser.fire(x, y);
-		}
-	}
-}
-
 export default class GameScene extends Phaser.Scene {
   constructor() {
-    super('GameScene');
+    super();
     this.totalBunnies;
     this.bunnyGroup;
     this.totalSpaceRocks;
     this.spaceRockGroup;
     this.gameover;
     this.burst;
-
 		this.player;
     this.inputKeys;
+    this.bulletGroup;
+    this.totalBullets;
   }
 
   create() {
     this.gameover = false;
     this.totalBunnies = 20;
     this.totalSpaceRocks = 13;
+    this.totalBullets = 30;
     this.buildWorld();
+    this.buildBunnies();
+    this.buildSpaceRocks();
+    this.buildEmitter();
+    this.buildBullets();
     this.addPlayer();
     this.addEvents();
   }
-
-  addPlayer() {
-		const centerX = this.cameras.main.width / 2;
-		const bottom = this.cameras.main.height;
-		this.player = this.add.image(centerX, bottom - 280, 'player');
-	}
-
-  addEvents() {
-		this.input.on('pointermove', (pointer) => {
-			this.player.x = pointer.x;
-		});
-
-    this.inputKeys = [
-			this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
-			this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
-		];
-	}
 
   buildWorld = ()=> {
     this.add.image(0, 0, 'sky').setOrigin(0, 0);
     this.add.image(270, 780, 'hill');
     this.add.image(270, 880, 'hill');
-    this.buildBunnies();
-    this.buildSpaceRocks();
-    this.buildEmitter();
   }
+
+  addPlayer() {
+		const centerX = this.cameras.main.width / 2;
+		const bottom = this.cameras.main.height;
+		this.player = this.add.image(centerX, bottom - 290, 'player');
+    this.player.setScale(1.5);
+    this.physics.world.enable(this.player);
+	}
+
+  addEvents() {
+		this.input.on('pointermove', (pointer) => {
+			this.player.x = pointer.x
+		});
+
+    this.inputKeys = [
+      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
+    ];
+	}
+
+  buildBullets() {
+    const config = {
+      classType: Phaser.GameObjects.Image,
+      key: 'laser',
+      active: false,
+      visible: false,
+      setXY: {x: 0, y: -20 },
+      setOrigin: {x: 0.5, y: 0.5},
+      frameQuantity: 30
+    }
+    this.bulletGroup = this.add.group({classType: Phaser.GameObjects.Image});
+    this.bulletGroup.createMultiple(config);
+    this.physics.world.enable(this.bulletGroup, 0);
+  }
+
+  fireBullet() {
+    const bullet = this.bulletGroup.getFirstDead(false);
+		if(bullet) {
+      bullet.body.reset(this.player.x, this.player.y - 20);
+      this.bulletGroup.setActive(true);
+      this.bulletGroup.setVisible(true);
+      bullet.body.setVelocityY(-900);
+		}
+	}
 
   buildBunnies() {
     this.bunnyGroup = this.add.group();
@@ -183,7 +178,6 @@ export default class GameScene extends Phaser.Scene {
       speed: { min: Phaser.Math.Between(-60, 60), max: Phaser.Math.Between(60, -60) },
       scale: { start: 0.3, end: 1.2 },
     });
-    this.input.on('pointerdown', this.fireBurst, this);
   }
 
   fireBurst(pointer) {
@@ -224,5 +218,10 @@ export default class GameScene extends Phaser.Scene {
 
   update() {
     this.physics.add.overlap(this.spaceRockGroup, this.bunnyGroup, this.bunnyCollision, null, this);
+    this.inputKeys.forEach(key => {
+			if(Phaser.Input.Keyboard.JustDown(key)) {
+				this.fireBullet();
+			}
+		});
   }
 }

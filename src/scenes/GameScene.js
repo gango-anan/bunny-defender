@@ -42,6 +42,8 @@ export default class GameScene extends Phaser.Scene {
     this.spaceRockGroup;
     this.gameover;
     this.burst;
+    
+		this.player;
   }
 
   create() {
@@ -49,7 +51,14 @@ export default class GameScene extends Phaser.Scene {
     this.totalBunnies = 20;
     this.totalSpaceRocks = 13;
     this.buildWorld();
+    this.addPlayer();
   }
+
+  addPlayer() {
+		const centerX = this.cameras.main.width / 2;
+		const bottom = this.cameras.main.height;
+		this.player = this.add.image(centerX, bottom - 280, 'player');
+	}
 
   buildWorld = ()=> {
     this.add.image(0, 0, 'sky').setOrigin(0, 0);

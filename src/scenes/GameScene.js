@@ -66,6 +66,11 @@ export default class GameScene extends Phaser.Scene {
 		this.input.on('pointermove', (pointer) => {
 			this.player.x = pointer.x;
 		});
+
+    this.inputKeys = [
+			this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+			this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
+		];
 	}
 
   buildWorld = ()=> {

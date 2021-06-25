@@ -27,7 +27,7 @@ export default class GameScene extends Phaser.Scene {
     this.addEvents();
   }
 
-  buildWorld = ()=> {
+  buildWorld() {
     this.add.image(0, 0, 'sky').setOrigin(0, 0);
     this.add.image(270, 780, 'hill');
     this.add.image(270, 880, 'hill');
@@ -68,8 +68,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   fireBullet() {
-    const bullet = this.bulletGroup.getFirstDead(false);
-		if(bullet) {
+    const bullet = this.bulletGroup.getFirstDead(true);
+		if(!this.gameover && bullet) {
       bullet.body.reset(this.player.x, this.player.y - 20);
       this.bulletGroup.setActive(true);
       this.bulletGroup.setVisible(true);
@@ -180,9 +180,9 @@ export default class GameScene extends Phaser.Scene {
     });
   }
 
-  fireBurst(pointer) {
+  fireBurst(x,y) {
     if(this.gameover === false){
-      this.burst.emitParticleAt(pointer.x, pointer.y);
+      this.burst.emitParticleAt(x, y);
       this.burst.start(true, 1000, null, 20);
     }
   }

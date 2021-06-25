@@ -23,33 +23,69 @@ export default class Title extends Phaser.Scene {
 
   buildMenu(dimensions) {
     const [ xCord, yCord ] = dimensions;
-    const playButton = this.add.image(xCord, yCord, 'buttons').setDisplaySize(200, 50);
-    this.add.text(playButton.x, playButton.y, 'Play', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const optionsButton = this.add.image(xCord, yCord+80, 'buttons').setDisplaySize(200, 50);
-    this.add.text(optionsButton.x, optionsButton.y, 'Options', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const creditsButton = this.add.image(xCord, yCord+160, 'buttons').setDisplaySize(200, 50);
-    this.add.text(creditsButton.x, creditsButton.y, 'Credits', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const leaderBoardButton = this.add.image(xCord, yCord+240, 'buttons').setDisplaySize(200, 50);
-    this.add.text(leaderBoardButton.x, leaderBoardButton.y, 'Leader Board', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const menuButtons = [playButton, optionsButton, creditsButton, leaderBoardButton];
+    const playButton = this.add.image(...dimensions, 'buttons').setDisplaySize(200, 50);
+    const playLabel = this.add.text(playButton.x, playButton.y, 'Play', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
+    const creditsButton = this.add.image(xCord, yCord+80, 'buttons').setDisplaySize(200, 50);
+    const creditsLabel = this.add.text(creditsButton.x, creditsButton.y, 'Credits', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
+    const leaderBoardButton = this.add.image(xCord, yCord+160, 'buttons').setDisplaySize(200, 50);
+    const leaderBoardLabel = this.add.text(leaderBoardButton.x, leaderBoardButton.y, 'Leader Board', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
+    const exitButton = this.add.image(xCord, yCord+240, 'buttons').setDisplaySize(200, 50);
+    const exitLabel = this.add.text(exitButton.x, exitButton.y, 'Exit', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
+    const menuButtons = [playButton, creditsButton, leaderBoardButton, exitButton];
+    const menuLabels = [playLabel, creditsLabel, leaderBoardLabel, exitLabel]
     this.addButtonInteractions(menuButtons);
-    this.addButtonEvents(menuButtons);
+    this.addButtonEvents(menuButtons, menuLabels);
   }
 
   addButtonInteractions(menuButtons) {
-    const[playButton, optionsButton, creditsButton, leaderBoardButton] = menuButtons;
+    const[playButton, creditsButton, leaderBoardButton, exitButton] = menuButtons;
     playButton.setInteractive({useHandCursor: true});
-    optionsButton.setInteractive({useHandCursor: true});
+    exitButton.setInteractive({useHandCursor: true});
     creditsButton.setInteractive({useHandCursor: true});
     leaderBoardButton.setInteractive({useHandCursor: true});
   }
 
-  addButtonEvents(menuButtons) {
-    const[playButton, optionsButton, creditsButton, leaderBoardButton] = menuButtons;
+  addButtonEvents(menuButtons, menuLabels) {
+    const[playButton, creditsButton, leaderBoardButton, exitButton] = menuButtons;
+    const [playLabel, creditsLabel, leaderBoardLabel, exitLabel] = menuLabels;
     playButton.on('pointerup', () => {
       this.scene.add('GameScene', GameScene, true);
       this.scene.remove('Title');
     })
+
+    playButton.on('pointerover', () => {
+      playLabel.setStyle({fill: '#00ff00'});
+    });
+
+    playButton.on('pointerout', () => {
+      playLabel.setStyle({fill: '#fff'});
+    });
+
+    creditsButton.on('pointerover', () => {
+      creditsLabel.setStyle({fill: '#00ff00'});
+    });
+
+    creditsButton.on('pointerout', () => {
+      creditsLabel.setStyle({fill: '#fff'});
+    });
+
+    exitButton.on('pointerover', () => {
+      exitLabel.setStyle({fill: '#00ff00'});
+    });
+
+    exitButton.on('pointerout', () => {
+      exitLabel.setStyle({fill: '#fff'});
+    });
+
+    leaderBoardButton.on('pointerover', () => {
+      leaderBoardLabel.setStyle({fill: '#00ff00'});
+    });
+
+    leaderBoardButton.on('pointerout', () => {
+      leaderBoardLabel.setStyle({fill: '#fff'});
+    });
+
+    
   }
 
   addRunningBunny() {

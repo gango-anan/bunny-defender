@@ -138,7 +138,7 @@ export default class GameScene extends Phaser.Scene {
       targets: b,
       x: bposition,
       duration: 3000,
-      ease: 'Quad.easeInOut',
+      ease: 'Power1',
       repeat: -1,
  
       delay: bdelay,

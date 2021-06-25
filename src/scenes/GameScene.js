@@ -1,21 +1,26 @@
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super();
-    this.totalBunnies = 20;
+    this.totalBunnies;
     this.bunnyGroup;
-    this.totalSpaceRocks = 13;
+    this.totalSpaceRocks;
     this.spaceRockGroup;
-    this.gameover = false;
+    this.gameover;
     this.burst;
 		this.player;
     this.inputKeys;
     this.bulletGroup;
-    this.totalBullets = 30;
-    this.score = 0;
-    this.scoreText = '';
+    this.totalBullets;
+    this.score;
+    this.scoreText;
   }
 
   create() {
+    this.gameover = false;
+    this.totalBunnies = 20;
+    this.totalSpaceRocks = 13;
+    this.totalBullets = 30;
+    this.scoreText = '';
     this.buildWorld();
     this.buildBunnies();
     this.buildSpaceRocks();
@@ -30,6 +35,7 @@ export default class GameScene extends Phaser.Scene {
   buildScores() {
     this.score = 0;
     this.scoreText = this.add.text(10,15, `Score: ${this.score}`, { fontSize: '32px', fill: '#fff'});
+    this.add.text(10,50, `Best score: ${0}`, { fontSize: '24px', fill: '#fff'});
   }
 
   getScore() {
@@ -221,6 +227,9 @@ export default class GameScene extends Phaser.Scene {
       this.totalBunnies--;
       this.checkBunniesLeft();
     }
+    if(this.gameover){
+      this.gameOver();
+    }
   }
 
   checkBunniesLeft() {
@@ -237,6 +246,19 @@ export default class GameScene extends Phaser.Scene {
     bunnyGhost.enableBody = true;
     bunnyGhost.onWorldBounds = true
     bunnyGhost.body.setVelocityY(-800);
+  }
+
+  gameOver() {
+    this.physics.pause();
+    this.player.setTint(0xee4824);
+
+    this.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.scene.restart();
+      },
+      loop: false
+    })
   }
 
   update() {

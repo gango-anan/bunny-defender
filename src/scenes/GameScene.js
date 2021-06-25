@@ -91,6 +91,7 @@ export default class GameScene extends Phaser.Scene {
       bullet.body.reset(this.player.x, this.player.y - 20);
       this.bulletGroup.setActive(true);
       this.bulletGroup.setVisible(true);
+      bullet.body.setGravityY(-300);
       bullet.body.setVelocityY(-900);
 		}
 	}
@@ -153,13 +154,13 @@ export default class GameScene extends Phaser.Scene {
       const xCord = Phaser.Math.Between(0, this.game.renderer.width);
       const yCord = Phaser.Math.Between(-1800, 0);
       const rock = this.spaceRockGroup.create(xCord, yCord, 'spaceRock', frames[i]);
-      const scale = Phaser.Math.FloatBetween(0.3, 1.0);
+      const scale = Phaser.Math.FloatBetween(0.2, 0.6);
       rock.scaleX = scale;
       rock.scaleY = scale;
       this.physics.world.enable(rock);
       const rockBody = rock.body;
-      rockBody.setGravityY(Phaser.Math.Between(50, 150));
-      rockBody.setVelocityY(Phaser.Math.Between(200, 400));
+      rockBody.setGravityY(Phaser.Math.Between(10, 50));
+      rockBody.setVelocityY(Phaser.Math.Between(100, 200));
       rock.anims.create({
         key: 'Fall',
         frameRate: 24,
@@ -180,7 +181,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   reSpawnRock(rock) {
-    if(this.gameover === false){
+    if(!this.gameover){
       rock.reset(Phaser.Math.Between(0, this.game.renderer.width), Phaser.Math.Between(-1800, 0));
       rock.setGravityY(Phaser.Math.Between(50, 150));
       rock.setVelocityY(Phaser.Math.Between(200, 400));
@@ -199,7 +200,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   fireBurst(x,y) {
-    if(this.gameover === false){
+    if(!this.gameover){
       this.burst.emitParticleAt(x, y);
       this.burst.start(true, 1000, null, 20);
     }
@@ -227,6 +228,7 @@ export default class GameScene extends Phaser.Scene {
     if(b.active) {
       this.makeGhost(b);
       b.destroy();
+      this.reSpawnRock(r.body);
       this.totalBunnies--;
       this.checkBunniesLeft();
     }
@@ -248,7 +250,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.world.enable(bunnyGhost);
     bunnyGhost.enableBody = true;
     bunnyGhost.onWorldBounds = true
-    bunnyGhost.body.setVelocityY(-800);
+    bunnyGhost.body.setVelocityY(-300);
   }
 
   saveBestScore() {

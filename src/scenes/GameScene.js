@@ -25,6 +25,7 @@ export default class GameScene extends Phaser.Scene {
     this.buildBullets();
     this.addPlayer();
     this.addEvents();
+    this.setCollisions();
   }
 
   buildWorld() {
@@ -189,6 +190,18 @@ export default class GameScene extends Phaser.Scene {
 
   burstCollision(r, b) {
     this.reSpawnRock(r);
+  }
+
+  setCollisions() {
+    if (!this.gameover) {
+      this.physics.add.collider(this.spaceRockGroup, this.bulletGroup, (rock, bullet) => {
+        const rockBody = rock.body;
+        const x = rockBody.x;
+        const y = rockBody.y;
+        this.reSpawnRock(rockBody);
+        this.fireBurst(x, y);
+      }, null, this);
+    }
   }
 
   bunnyCollision(r, b) {

@@ -1,23 +1,21 @@
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super();
-    this.totalBunnies;
+    this.totalBunnies = 20;
     this.bunnyGroup;
-    this.totalSpaceRocks;
+    this.totalSpaceRocks = 13;
     this.spaceRockGroup;
-    this.gameover;
+    this.gameover = false;
     this.burst;
 		this.player;
     this.inputKeys;
     this.bulletGroup;
-    this.totalBullets;
+    this.totalBullets = 30;
+    this.score = 0;
+    this.scoreText = '';
   }
 
   create() {
-    this.gameover = false;
-    this.totalBunnies = 20;
-    this.totalSpaceRocks = 13;
-    this.totalBullets = 30;
     this.buildWorld();
     this.buildBunnies();
     this.buildSpaceRocks();
@@ -26,6 +24,17 @@ export default class GameScene extends Phaser.Scene {
     this.addPlayer();
     this.addEvents();
     this.setCollisions();
+    this.buildScores();
+  }
+
+  buildScores() {
+    this.score = 0;
+    this.scoreText = this.add.text(10,15, `Score: ${this.score}`, { fontSize: '32px', fill: '#fff'});
+  }
+
+  getScore() {
+    this.score += 5;
+    this.scoreText.setText(`Score: ${this.score}`);
   }
 
   buildWorld() {
@@ -200,6 +209,7 @@ export default class GameScene extends Phaser.Scene {
         const y = rockBody.y;
         this.reSpawnRock(rockBody);
         this.fireBurst(x, y);
+        this.getScore();
       }, null, this);
     }
   }

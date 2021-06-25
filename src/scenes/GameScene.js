@@ -21,6 +21,7 @@ export default class GameScene extends Phaser.Scene {
     this.totalSpaceRocks = 13;
     this.totalBullets = 30;
     this.scoreText = '';
+    this.score = 0;
     this.buildWorld();
     this.buildBunnies();
     this.buildSpaceRocks();
@@ -34,8 +35,9 @@ export default class GameScene extends Phaser.Scene {
 
   buildScores() {
     this.score = 0;
+    const bestScore = localStorage.getItem('bestScore');
     this.scoreText = this.add.text(10,15, `Score: ${this.score}`, { fontSize: '32px', fill: '#fff'});
-    this.add.text(10,50, `Best score: ${0}`, { fontSize: '24px', fill: '#fff'});
+    this.add.text(10,50, `Best score: ${ bestScore || 0 }`, { fontSize: '24px', fill: '#fff'});
   }
 
   getScore() {
@@ -216,6 +218,7 @@ export default class GameScene extends Phaser.Scene {
         this.reSpawnRock(rockBody);
         this.fireBurst(x, y);
         this.getScore();
+        this.saveBestScore();
       }, null, this);
     }
   }
@@ -248,9 +251,19 @@ export default class GameScene extends Phaser.Scene {
     bunnyGhost.body.setVelocityY(-800);
   }
 
+  saveBestScore() {
+    const bestScoreText = localStorage.getItem('bestScore');
+    const bestScore = bestScoreText && parseInt(bestScoreText, 10);
+    if(!bestScore || this.score > bestScore) {
+      localStorage.setItem('bestScore', this.score);
+    }
+  }
+
   gameOver() {
     this.physics.pause();
     this.player.setTint(0xee4824);
+
+    this.saveBestScore();
 
     this.time.addEvent({
       delay: 1000,

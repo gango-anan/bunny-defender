@@ -1,6 +1,6 @@
 export default class GameScene extends Phaser.Scene {
   constructor() {
-    super();
+    super('GameScene');
     this.totalBunnies;
     this.bunnyGroup;
     this.totalSpaceRocks;
@@ -13,9 +13,16 @@ export default class GameScene extends Phaser.Scene {
     this.totalBullets;
     this.score;
     this.scoreText;
+    this.canvasWidth;
+    this.canvasHeight;
+    this.playerVelocity;
   }
 
   create() {
+    this.playerVelocity = 400;
+    this.canvasWidth = this.cameras.main.width;
+    this.canvasHeight = this.cameras.main.height;
+    this.movementKeys = this.input.keyboard.createCursorKeys();
     this.gameover = false;
     this.totalBunnies = 20;
     this.totalSpaceRocks = 13;
@@ -33,18 +40,6 @@ export default class GameScene extends Phaser.Scene {
     this.buildScores();
   }
 
-  buildScores() {
-    this.score = 0;
-    const bestScore = localStorage.getItem('bestScore');
-    this.scoreText = this.add.text(10,15, `Score: ${this.score}`, { fontSize: '32px', fill: '#fff'});
-    this.add.text(10,50, `Best score: ${ bestScore || 0 }`, { fontSize: '24px', fill: '#fff'});
-  }
-
-  getScore() {
-    this.score += 5;
-    this.scoreText.setText(`Score: ${this.score}`);
-  }
-
   buildWorld() {
     this.add.image(0, 0, 'sky').setOrigin(0, 0);
     this.add.image(270, 780, 'hill');
@@ -54,45 +49,50 @@ export default class GameScene extends Phaser.Scene {
   addPlayer() {
 		const centerX = this.cameras.main.width / 2;
 		const bottom = this.cameras.main.height;
-		this.player = this.add.image(centerX, bottom - 290, 'player');
+		this.player = this.physics.add.sprite(centerX, bottom - 260, 'player');
     this.player.setScale(1.5);
-    this.physics.world.enable(this.player);
 	}
 
-  addEvents() {
-		this.input.on('pointermove', (pointer) => {
-			this.player.x = pointer.x
-		});
+  movePlayer() {
+    const { left, right, up, down } = this.movementKeys;
+    if(left.isDown && this.player.x > this.player.width*0.5) {
+      this.player.setVelocityX(-this.playerVelocity);
+    }
+    else if(right.isDown && this.player.x <= this.canvasWidth-16) {
+      this.player.setVelocityX(this.playerVelocity);
+    }
+    else {
+      this.player.setVelocityX(0);
+    }
 
-    this.inputKeys = [
-      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
-      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
-    ];
-	}
+    if(up.isDown) {
+      this.player.setVelocityY(-this.playerVelocity);
+    }
+    else if(down.isDown) {
+      this.player.setVelocityY(this.playerVelocity);
+    }
+    else {
+      this.player.setVelocityY(0);
+    }
+  }
 
   buildBullets() {
-    const config = {
-      classType: Phaser.GameObjects.Image,
-      key: 'laser',
-      active: false,
-      visible: false,
-      setXY: {x: 0, y: -20 },
-      setOrigin: {x: 0.5, y: 0.5},
-      frameQuantity: 30
+    this.bulletGroup = this.physics.add.group();
+    for (let index = 0; index < this.totalBullets; index++) {
+      const bullet = this.bulletGroup.create(-100, 0, 'laser');
+      bullet.active = false;
     }
-    this.bulletGroup = this.add.group({classType: Phaser.GameObjects.Image});
-    this.bulletGroup.createMultiple(config);
-    this.physics.world.enable(this.bulletGroup, 0);
+    this.bulletGroup.setVisible(false);
   }
 
   fireBullet() {
-    const bullet = this.bulletGroup.getFirstDead(true);
+    const bullet = this.bulletGroup.getFirstDead(false);
 		if(!this.gameover && bullet) {
-      bullet.body.reset(this.player.x, this.player.y - 20);
-      this.bulletGroup.setActive(true);
-      this.bulletGroup.setVisible(true);
+      bullet.body.reset(this.player.x, this.player.y - 32);
+      bullet.active = true;
+      bullet.visible = true;
       bullet.body.setGravityY(-300);
-      bullet.body.setVelocityY(-900);
+      bullet.body.setVelocityY(-1000);
 		}
 	}
 
@@ -183,7 +183,7 @@ export default class GameScene extends Phaser.Scene {
   reSpawnRock(rock) {
     if(!this.gameover){
       rock.reset(Phaser.Math.Between(0, this.game.renderer.width), Phaser.Math.Between(-1800, 0));
-      rock.setGravityY(Phaser.Math.Between(50, 150));
+      rock.setGravityY(50);
       rock.setVelocityY(Phaser.Math.Between(200, 400));
     }
   }
@@ -209,6 +209,29 @@ export default class GameScene extends Phaser.Scene {
   burstCollision(r, b) {
     this.reSpawnRock(r);
   }
+
+  buildScores() {
+    this.score = 0;
+    const bestScore = localStorage.getItem('bestScore');
+    this.scoreText = this.add.text(10,15, `Score: ${this.score}`, { fontSize: '32px', fill: '#fff'});
+    this.add.text(10,50, `Best score: ${ bestScore || 0 }`, { fontSize: '24px', fill: '#fff'});
+  }
+
+  getScore() {
+    this.score += 5;
+    this.scoreText.setText(`Score: ${this.score}`);
+  }
+
+  addEvents() {
+		// this.input.on('pointermove', (pointer) => {
+		// 	this.player.x = pointer.x
+		// });
+
+    this.inputKeys = [
+      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+      this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
+    ];
+	}
 
   setCollisions() {
     if (!this.gameover) {
@@ -244,13 +267,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   makeGhost(b) {
-    const bunnyGhost = this.add.sprite(b.x-20, b.y-180, 'ghost');
-    bunnyGhost.setOrigin(0.5, 0.5);
+    const bunnyGhost = this.physics.add.sprite(b.x-20, b.y-180, 'ghost');
     bunnyGhost.scaleX = b.scaleX;
-    this.physics.world.enable(bunnyGhost);
-    bunnyGhost.enableBody = true;
-    bunnyGhost.onWorldBounds = true
-    bunnyGhost.body.setVelocityY(-300);
+    bunnyGhost.body.setVelocityY(-600);
   }
 
   saveBestScore() {
@@ -277,6 +296,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    this.movePlayer();
     this.physics.add.overlap(this.spaceRockGroup, this.bunnyGroup, this.bunnyCollision, null, this);
     this.inputKeys.forEach(key => {
 			if(Phaser.Input.Keyboard.JustDown(key)) {

@@ -54,7 +54,7 @@ export default class GameScene extends Phaser.Scene {
     this.gameover = false;
     this.totalBunnies = 20;
     this.totalSpaceRocks = 13;
-    this.totalBullets = 30;
+    this.totalBullets = 100;
     this.scoreText = '';
     this.score = 0;
     this.userName = 'Galiwango';

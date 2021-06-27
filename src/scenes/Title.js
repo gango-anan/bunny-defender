@@ -22,17 +22,25 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   buildMenu(dimensions) {
-    const [ xCord, yCord ] = dimensions;
-    const playButton = this.add.image(...dimensions, 'buttons').setDisplaySize(200, 50);
-    const playLabel = this.add.text(playButton.x, playButton.y, 'Play', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const creditsButton = this.add.image(xCord, yCord+80, 'buttons').setDisplaySize(200, 50);
-    const creditsLabel = this.add.text(creditsButton.x, creditsButton.y, 'Credits', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const leaderBoardButton = this.add.image(xCord, yCord+160, 'buttons').setDisplaySize(200, 50);
-    const leaderBoardLabel = this.add.text(leaderBoardButton.x, leaderBoardButton.y, 'Leader Board', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const exitButton = this.add.image(xCord, yCord+240, 'buttons').setDisplaySize(200, 50);
-    const exitLabel = this.add.text(exitButton.x, exitButton.y, 'Exit', { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
-    const menuButtons = [playButton, creditsButton, leaderBoardButton, exitButton];
-    const menuLabels = [playLabel, creditsLabel, leaderBoardLabel, exitLabel]
+    const menus = [
+      {scene: 'GameScene', text: 'Play'},
+      {scene: 'Credits', text: 'Credits'},
+      {scene: 'LeaderBoard', text: 'Leader Board'},
+      {scene: null, text: 'Exit '},
+    ];
+    let menuButtons = [];
+    let menuLabels = [];
+    let stepUnit  = 0;
+    
+    menus.forEach(menuItem => {
+      const menuPosition = [dimensions[0], dimensions[1] + stepUnit];
+      const menuButton = this.add.image(...menuPosition, 'buttons').setDisplaySize(200, 50);
+      menuButtons.push(menuButton);
+      const menuLabel = this.add.text(...menuPosition, menuItem.text, { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
+      menuLabels.push(menuLabel);
+      stepUnit += 80;
+    });
+
     this.addButtonInteractions(menuButtons);
     this.addButtonEvents(menuButtons, menuLabels);
   }

@@ -1,4 +1,4 @@
-import Title from "./Title";
+import Phaser from "phaser";
 
 export default class Preloader extends Phaser.Scene {
   constructor() {
@@ -6,9 +6,9 @@ export default class Preloader extends Phaser.Scene {
   }
   
   preload() {
-    let titleText = this.add.image(0, 0, 'titleImage').setOrigin(0,0);  
-    let progressBar = this.add.graphics();
-    let progressBox = this.add.graphics(); 
+    const titleText = this.add.image(0, 0, 'titleImage').setOrigin(0,0);  
+    const progressBar = this.add.graphics();
+    const progressBox = this.add.graphics(); 
     
     progressBox.fillStyle(0x050511, 0.5);
     progressBox.fillRect(80, 600, 380, 50);
@@ -53,7 +53,8 @@ export default class Preloader extends Phaser.Scene {
   }
 
   create() {
-    this.scene.add('Title', Title, true);
-    this.scene.remove('Preloader');
+    this.scene.start('TitleScene');
+    // this.scene.add('Title', Title, true);
+    // this.scene.remove('Preloader');
   }
 }

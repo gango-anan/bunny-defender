@@ -236,9 +236,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   buildPauseButton() {
-    this.add.image(this.canvasWidth - 16, this.canvasHeight - 16, 'pauseBtn')
-    .setOrigin(1,1)
-    .setScale(2, 2);
+    const pauseButton = this.add.image(this.canvasWidth - 16, this.canvasHeight - 16, 'pauseBtn')
+    .setOrigin(1)
+    .setScale(2.5)
+    .setInteractive();
+    pauseButton.on('pointerdown', () => {
+      this.physics.pause();
+      this.scene.pause();
+    });
   }
 
   addEvents() {

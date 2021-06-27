@@ -1,8 +1,8 @@
-import GameScene from "./GameScene";
+import Phaser from "phaser";
 
-export default class Title extends Phaser.Scene {
+export default class TitleScene extends Phaser.Scene {
   constructor() {
-    super('Title');
+    super('TitleScene');
     this.dimensions;
     this.mainAudio;
   }
@@ -49,8 +49,7 @@ export default class Title extends Phaser.Scene {
     const[playButton, creditsButton, leaderBoardButton, exitButton] = menuButtons;
     const [playLabel, creditsLabel, leaderBoardLabel, exitLabel] = menuLabels;
     playButton.on('pointerup', () => {
-      this.scene.add('GameScene', GameScene, true);
-      this.scene.remove('Title');
+      this.scene.start('GameScene');
     })
 
     playButton.on('pointerover', () => {

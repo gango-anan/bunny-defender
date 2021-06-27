@@ -16,7 +16,7 @@ const config = {
   },
   physics: {
     default: 'arcade',
-    arcade: { debug: true, }
+    arcade: { debug: false, }
   },
   scene: [Boot, Preloader, TitleScene ,GameScene, CreditsScene, LeaderBoard]
 }

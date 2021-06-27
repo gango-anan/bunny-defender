@@ -27,7 +27,7 @@ export default class GameScene extends Phaser.Scene {
     this.buildWorld();
     this.buildBunnies();
     this.buildPlayer();
-    this.buildPauseButton();
+    this.backButton();
     this.buildSpaceRocks();
     this.buildEmitter();
     this.buildBullets();
@@ -63,8 +63,8 @@ export default class GameScene extends Phaser.Scene {
 
   buildWorld() {
     this.add.image(0, 0, 'sky').setOrigin(0, 0);
-    this.add.image(270, 780, 'hill');
-    this.add.image(270, 880, 'hill');
+    this.add.image(0, 860, 'hill').setOrigin(0,1);
+    this.add.image(0, 960, 'hill').setOrigin(0,1);
   }
 
   buildPlayer() {
@@ -84,16 +84,6 @@ export default class GameScene extends Phaser.Scene {
     }
     else {
       this.player.setVelocityX(0);
-    }
-
-    if(up.isDown) {
-      this.player.setVelocityY(-this.playerVelocity);
-    }
-    else if(down.isDown) {
-      this.player.setVelocityY(this.playerVelocity);
-    }
-    else {
-      this.player.setVelocityY(0);
     }
   }
 
@@ -196,7 +186,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   resetRock(rock) {
-    if(rock.y > this.game.renderer.height - 260) {
+    if(rock.y >= this.game.renderer.height - 100) {
       this.reSpawnRock(rock);   
     }
   }
@@ -237,6 +227,16 @@ export default class GameScene extends Phaser.Scene {
   getScore() {
     this.score += 5;
     this.scoreText.setText(`Score: ${this.score}`);
+  }
+
+  backButton() {
+    const backBtn = this.add.image(this.cameras.main.width - 16, this.cameras.main.height - 16, 'backBtn')
+    .setOrigin(1)
+    .setScale(2)
+    .setInteractive();
+    backBtn.on('pointerup', () => {
+      this.scene.start('TitleScene')
+    });
   }
 
   buildPauseButton() {
@@ -313,11 +313,11 @@ export default class GameScene extends Phaser.Scene {
     this.player.setTint(0xee4824);
 
     this.saveBestScore();
-
+    this.add.text(80, 480, `Your Score is: ${this.score}`, { fontSize: '32px', fill: '#fff'});
     this.time.addEvent({
-      delay: 1000,
+      delay: 3000,
       callback: () => {
-        this.scene.restart();
+        this.scene.start('TitleScene')
       },
       loop: false
     })

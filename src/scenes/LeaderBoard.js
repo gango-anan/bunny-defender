@@ -8,6 +8,7 @@ export default class LeaderBoard extends Phaser.Scene {
   create(){
     this.buildBackground();
     this.displayBestScores();
+    this.backButton();
   }
 
   buildBackground() {
@@ -42,6 +43,16 @@ export default class LeaderBoard extends Phaser.Scene {
         stepper += 50;
       }
     }
+  }
+
+  backButton() {
+    const backBtn = this.add.image(this.cameras.main.width - 16, this.cameras.main.height - 16, 'backBtn')
+    .setOrigin(1)
+    .setScale(2.5)
+    .setInteractive();
+    backBtn.on('pointerup', () => {
+      this.scene.start('TitleScene')
+    });
   }
 
 }

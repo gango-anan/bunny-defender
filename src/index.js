@@ -3,6 +3,7 @@ import Boot from './scenes/Boot';
 import Preloader from './scenes/Preloader';
 import GameScene from './scenes/GameScene';
 import TitleScene from './scenes/Title';
+import LeaderBoard from './scenes/LeaderBoard';
 
 const config = {
   type: Phaser.AUTO,
@@ -16,7 +17,7 @@ const config = {
     default: 'arcade',
     arcade: { debug: true, }
   },
-  scene: [Boot, Preloader, TitleScene ,GameScene]
+  scene: [Boot, Preloader, TitleScene ,GameScene, LeaderBoard]
 }
 
 const game = new Phaser.Game(config);

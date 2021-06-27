@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
@@ -7,7 +9,7 @@ export default class GameScene extends Phaser.Scene {
     this.spaceRockGroup;
     this.gameover;
     this.burst;
-		this.player;
+    this.player;
     this.inputKeys;
     this.bulletGroup;
     this.totalBullets;
@@ -24,17 +26,21 @@ export default class GameScene extends Phaser.Scene {
     this.buildBunnies();
     this.buildPlayer();
     this.buildSpaceRocks();
-    this.buildBullets();
     this.buildEmitter();
-    this.buildScores();
+    this.buildBullets();
     this.addEvents();
     this.setRockBulletCollision();
+    this.buildScores();
   }
 
   update() {
     this.movePlayer();
-    this.monitorRockBunnyCollisions();
-    this.monitorShooting();
+    this.physics.add.overlap(this.spaceRockGroup, this.bunnyGroup, this.bunnyCollision, null, this);
+    this.inputKeys.forEach(key => {
+			if(Phaser.Input.Keyboard.JustDown(key)) {
+				this.fireBullet();
+			}
+		});
   }
 
   initializeInputs() {
@@ -57,17 +63,18 @@ export default class GameScene extends Phaser.Scene {
   }
 
   buildPlayer() {
-		this.player = this.physics.add.sprite(this.canvasWidth*0.5, this.canvasHeight - 260, 'player');
+		const centerX = this.cameras.main.width / 2;
+		const bottom = this.cameras.main.height;
+		this.player = this.physics.add.sprite(centerX, bottom - 260, 'player');
     this.player.setScale(1.5);
-    this.player.setCollideWorldBounds(true);
 	}
 
   movePlayer() {
     const { left, right, up, down } = this.movementKeys;
-    if(left.isDown) {
+    if(left.isDown && this.player.x > this.player.width*0.5) {
       this.player.setVelocityX(-this.playerVelocity);
     }
-    else if(right.isDown) {
+    else if(right.isDown && this.player.x <= this.canvasWidth-16) {
       this.player.setVelocityX(this.playerVelocity);
     }
     else {
@@ -88,7 +95,7 @@ export default class GameScene extends Phaser.Scene {
   buildBullets() {
     this.bulletGroup = this.physics.add.group();
     for (let index = 0; index < this.totalBullets; index++) {
-      const bullet = this.bulletGroup.create(1060, 0, 'laser').setImmovable(true);
+      const bullet = this.bulletGroup.create(this.canvasWidth + 100, 0, 'laser');
       bullet.active = false;
     }
     this.bulletGroup.setVisible(false);
@@ -155,17 +162,21 @@ export default class GameScene extends Phaser.Scene {
   }
 
   buildSpaceRocks() {
-    this.spaceRockGroup = this.physics.add.group();
+    this.spaceRockGroup = this.add.group();
+    this.spaceRockGroup.enableBody = true;
     let spaceRockAtlasTexture = this.textures.get('spaceRock');
     let frames = spaceRockAtlasTexture.getFrameNames();
     for(let i=0; i<this.totalSpaceRocks; i++) {
-      const xCord = Phaser.Math.Between(0, this.canvasWidth);
+      const xCord = Phaser.Math.Between(0, this.game.renderer.width);
       const yCord = Phaser.Math.Between(-1800, 0);
       const rock = this.spaceRockGroup.create(xCord, yCord, 'spaceRock', frames[i]);
       const scale = Phaser.Math.FloatBetween(0.2, 0.6);
-      rock.setScale(scale, scale)
-      rock.body.setGravityY(Phaser.Math.Between(10, 50));
-      rock.body.setVelocityY(Phaser.Math.Between(50, 100));
+      rock.scaleX = scale;
+      rock.scaleY = scale;
+      this.physics.world.enable(rock);
+      const rockBody = rock.body;
+      rockBody.setGravityY(Phaser.Math.Between(10, 50));
+      rockBody.setVelocityY(Phaser.Math.Between(100, 200));
       rock.anims.create({
         key: 'Fall',
         frameRate: 24,
@@ -173,9 +184,9 @@ export default class GameScene extends Phaser.Scene {
         frames: this.anims.generateFrameNames('spaceRock', { prefix: 'SpaceRock', start: 0, end: 49, zeroPad: 1 })
       });
       rock.play('Fall');
-      rock.body.setCollideWorldBounds(true);
-      rock.body.onWorldBounds = true;
-      rock.body.world.on('worldbounds', this.resetRock, this);
+      rockBody.setCollideWorldBounds(true);
+      rockBody.onWorldBounds = true;
+      rockBody.world.on('worldbounds', this.resetRock, this);
     }
   }
 
@@ -211,11 +222,8 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  burstCollision(r, b) {
-    this.reSpawnRock(r);
-  }
-
   buildScores() {
+    this.score = 0;
     const bestScore = localStorage.getItem('bestScore');
     this.scoreText = this.add.text(10,15, `Score: ${this.score}`, { fontSize: '32px', fill: '#fff'});
     this.add.text(10,50, `Best score: ${ bestScore || 0 }`, { fontSize: '24px', fill: '#fff'});
@@ -250,9 +258,9 @@ export default class GameScene extends Phaser.Scene {
   bunnyCollision(r, b) {
     if(b.active) {
       this.makeGhost(b);
-      //b.destroy();
+      b.destroy();
       this.reSpawnRock(r.body);
-      //this.totalBunnies--;
+      this.totalBunnies--;
       this.checkBunniesLeft();
     }
     if(this.gameover){
@@ -280,18 +288,6 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  monitorShooting() {
-    this.inputKeys.forEach(key => {
-			if(Phaser.Input.Keyboard.JustDown(key)) {
-				this.fireBullet();
-			}
-		});
-  }
-
-  monitorRockBunnyCollisions() {
-    this.physics.add.overlap(this.spaceRockGroup, this.bunnyGroup, this.bunnyCollision, null, this);
-  }
-
   gameOver() {
     this.physics.pause();
     this.player.setTint(0xee4824);
@@ -307,9 +303,5 @@ export default class GameScene extends Phaser.Scene {
     })
   }
 
-  bulletBottomBound(bullet) {
-    if (bullet.getBounds().bottom) {
-      console.log('Yeeyiii...');
-    }
-  }
 }
+

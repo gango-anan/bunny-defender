@@ -313,6 +313,7 @@ export default class GameScene extends Phaser.Scene {
     this.player.setTint(0xee4824);
 
     this.saveBestScore();
+    this.add.text(160, 380, "Game Over", { fontSize: '32px', fill: '#fff'});
     this.add.text(80, 480, `Your Score is: ${this.score}`, { fontSize: '32px', fill: '#fff'});
     this.time.addEvent({
       delay: 3000,

@@ -21,7 +21,17 @@ export default class LeaderBoard extends Phaser.Scene {
     const yCord = this.cameras.main.height;
     this.add.text(xCord*0.5 - 170 , yCord*0.5 - 100, 'LEADER BOARD', { fontSize: '48px', fill: '#fff'});
   
-
+    allScores.sort((a, b) => {
+      const recordedScoreA = a.recordedScore;
+      const recordedScoreB = b.recordedScore;
+      if (recordedScoreB < recordedScoreA) {
+        return -1;
+      }
+      if (recordedScoreB > recordedScoreA) {
+        return 1;
+      }
+      return 0;
+    });
 
     let stepper = 0;
     if (allScores != null) {

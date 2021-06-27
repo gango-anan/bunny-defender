@@ -5,9 +5,16 @@ export default class TitleScene extends Phaser.Scene {
     super('TitleScene');
     this.dimensions;
     this.mainAudio;
+    this.menus;
   }
 
   create() {
+    this.menus = [
+      {scene: 'GameScene', text: 'Play'},
+      {scene: 'CreditsScene', text: 'Credits'},
+      {scene: 'LeaderBoard', text: 'Leader Board'},
+      {scene: null, text: 'Exit'},
+    ];
     this.dimensions = [this.game.renderer.width*0.5, this.game.renderer.height*0.5-100];
     //this.playSceneMusic();
     this.add.image(0, 0, 'sky').setOrigin(0,0);
@@ -22,19 +29,15 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   buildMenu(dimensions) {
-    const menus = [
-      {scene: 'GameScene', text: 'Play'},
-      {scene: 'Credits', text: 'Credits'},
-      {scene: 'LeaderBoard', text: 'Leader Board'},
-      {scene: null, text: 'Exit '},
-    ];
     let menuButtons = [];
     let menuLabels = [];
     let stepUnit  = 0;
     
-    menus.forEach(menuItem => {
+    this.menus.forEach(menuItem => {
       const menuPosition = [dimensions[0], dimensions[1] + stepUnit];
-      const menuButton = this.add.image(...menuPosition, 'buttons').setDisplaySize(200, 50);
+      const menuButton = this.add.image(...menuPosition, 'buttons')
+      .setDisplaySize(200, 50)
+      .setInteractive({useHandCursor: true});
       menuButtons.push(menuButton);
       const menuLabel = this.add.text(...menuPosition, menuItem.text, { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
       menuLabels.push(menuLabel);
@@ -46,53 +49,28 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   addButtonInteractions(menuButtons) {
-    const[playButton, creditsButton, leaderBoardButton, exitButton] = menuButtons;
-    playButton.setInteractive({useHandCursor: true});
-    exitButton.setInteractive({useHandCursor: true});
-    creditsButton.setInteractive({useHandCursor: true});
-    leaderBoardButton.setInteractive({useHandCursor: true});
+    let index = 0;
+    this.menus.forEach(menuItem => {
+      menuButtons[index].on('pointerup', () => {
+        menuItem.scene && this.scene.start(menuItem.scene);
+        if(menuItem.text === 'Exit') {
+          this.game.destroy(true);
+        }
+      })
+      index += 1;
+    });
   }
 
   addButtonEvents(menuButtons, menuLabels) {
-    const[playButton, creditsButton, leaderBoardButton, exitButton] = menuButtons;
-    const [playLabel, creditsLabel, leaderBoardLabel, exitLabel] = menuLabels;
-    playButton.on('pointerup', () => {
-      this.scene.start('GameScene');
-    })
-
-    playButton.on('pointerover', () => {
-      playLabel.setStyle({fill: '#00ff00'});
-    });
-
-    playButton.on('pointerout', () => {
-      playLabel.setStyle({fill: '#fff'});
-    });
-
-    creditsButton.on('pointerover', () => {
-      creditsLabel.setStyle({fill: '#00ff00'});
-    });
-
-    creditsButton.on('pointerout', () => {
-      creditsLabel.setStyle({fill: '#fff'});
-    });
-
-    exitButton.on('pointerover', () => {
-      exitLabel.setStyle({fill: '#00ff00'});
-    });
-
-    exitButton.on('pointerout', () => {
-      exitLabel.setStyle({fill: '#fff'});
-    });
-
-    leaderBoardButton.on('pointerover', () => {
-      leaderBoardLabel.setStyle({fill: '#00ff00'});
-    });
-
-    leaderBoardButton.on('pointerout', () => {
-      leaderBoardLabel.setStyle({fill: '#fff'});
-    });
-
-    
+    for (let index = 0; index < menuButtons.length; index++) {
+      menuButtons[index].on('pointerover', () => {
+        menuLabels[index].setStyle({fill: '#00ff00'});
+      });
+  
+      menuButtons[index].on('pointerout', () => {
+        menuLabels[index].setStyle({fill: '#fff'});
+      });
+    }    
   }
 
   addRunningBunny() {

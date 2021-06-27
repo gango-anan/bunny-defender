@@ -25,6 +25,7 @@ export default class GameScene extends Phaser.Scene {
     this.buildWorld();
     this.buildBunnies();
     this.buildPlayer();
+    this.buildPauseButton();
     this.buildSpaceRocks();
     this.buildEmitter();
     this.buildBullets();
@@ -232,6 +233,12 @@ export default class GameScene extends Phaser.Scene {
   getScore() {
     this.score += 5;
     this.scoreText.setText(`Score: ${this.score}`);
+  }
+
+  buildPauseButton() {
+    this.add.image(this.canvasWidth - 16, this.canvasHeight - 16, 'pauseBtn')
+    .setOrigin(1,1)
+    .setScale(2, 2);
   }
 
   addEvents() {

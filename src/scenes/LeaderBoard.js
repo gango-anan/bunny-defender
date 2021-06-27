@@ -16,11 +16,22 @@ export default class LeaderBoard extends Phaser.Scene {
   }
 
   displayBestScores() {
-    const bestScore = localStorage.getItem('bestScore');
+    const allScores = JSON.parse(localStorage.getItem('scores'));
     const xCord = this.cameras.main.width;
     const yCord = this.cameras.main.height;
     this.add.text(xCord*0.5 - 170 , yCord*0.5 - 100, 'LEADER BOARD', { fontSize: '48px', fill: '#fff'});
-    const scoreLabel = this.add.text(xCord*0.5 - 170 , yCord*0.5, `Name: ${ bestScore }`, { fontSize: '32px', fill: '#fff'})
-                          .setOrigin(0,0);
+  
+
+
+    let stepper = 0;
+    if (allScores != null) {
+      for (let index = 0; allScores[index] && index < 5; index++) {
+        const scorePosition = [xCord*0.5 - 170, yCord*0.5 + stepper];
+        this.add.text(...scorePosition, `${allScores[index].username}: ${ allScores[index].recordedScore }`, { fontSize: '32px', fill: '#fff'})
+        .setOrigin(0,0);
+        stepper += 50;
+      }
+    }
   }
+
 }

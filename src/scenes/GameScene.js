@@ -18,6 +18,8 @@ export default class GameScene extends Phaser.Scene {
     this.canvasWidth;
     this.canvasHeight;
     this.playerVelocity;
+    this.userName;
+    this.scores;
   }
 
   create() {
@@ -55,6 +57,8 @@ export default class GameScene extends Phaser.Scene {
     this.totalBullets = 30;
     this.scoreText = '';
     this.score = 0;
+    this.userName = 'Galiwango';
+    this.scores = JSON.parse(localStorage.getItem('scores')) || [];
   }
 
   buildWorld() {
@@ -262,7 +266,6 @@ export default class GameScene extends Phaser.Scene {
         this.reSpawnRock(rockBody);
         this.fireBurst(x, y);
         this.getScore();
-        this.saveBestScore();
       }, null, this);
     }
   }
@@ -298,6 +301,11 @@ export default class GameScene extends Phaser.Scene {
     if(!bestScore || this.score > bestScore) {
       localStorage.setItem('bestScore', this.score);
     }
+
+
+    const currentScore = { username: this.userName, recordedScore: this.score };
+    this.scores.push(currentScore);
+    localStorage.setItem('scores', JSON.stringify(this.scores));
   }
 
   gameOver() {

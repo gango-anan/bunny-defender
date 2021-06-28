@@ -301,11 +301,9 @@ export default class GameScene extends Phaser.Scene {
     if(!bestScore || this.score > bestScore) {
       localStorage.setItem('bestScore', this.score);
     }
-
-
-    const currentScore = { username: this.userName, recordedScore: this.score };
-    this.scores.push(currentScore);
-    localStorage.setItem('scores', JSON.stringify(this.scores));
+    const currentScore = JSON.parse(localStorage.getItem('currentUserScore'));
+    currentScore.recordedScore = this.score;
+    localStorage.setItem('currentUserScore', JSON.stringify(currentScore));
   }
 
   gameOver() {
@@ -323,6 +321,5 @@ export default class GameScene extends Phaser.Scene {
       loop: false
     })
   }
-
 }
 

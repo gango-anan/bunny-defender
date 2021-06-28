@@ -24,7 +24,7 @@ export default class Preloader extends Phaser.Scene {
         progressBox.destroy();
         titleText.destroy();
     });
-
+    this.load.html('form', 'assets/images/form.html');
     this.load.image('title', 'assets/images/TitleImage.png');
     this.load.image('explosion', 'assets/images/explosion.png');
     this.load.image('ghost', 'assets/images/ghost.png');
@@ -54,8 +54,6 @@ export default class Preloader extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('TitleScene');
-    // this.scene.add('Title', Title, true);
-    // this.scene.remove('Preloader');
+    this.scene.start('StorageScene');
   }
 }

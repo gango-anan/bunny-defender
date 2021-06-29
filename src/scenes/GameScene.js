@@ -238,6 +238,7 @@ export default class GameScene extends Phaser.Scene {
     .setScale(2)
     .setInteractive();
     backBtn.on('pointerup', () => {
+      this.sound.stopAll();
       this.scene.start('TitleScene')
     });
   }
@@ -343,9 +344,9 @@ export default class GameScene extends Phaser.Scene {
         this.add.text(60, 400, "     Can't save score,\n\nCheck your internet connection.", { fontSize: '24px', fill: '#fff'});
       }
     })
-
+    this.sound.stopAll();
     this.time.addEvent({
-      delay: 10000,
+      delay: 5000,
       callback: () => {
         this.scene.start('TitleScene')
       },

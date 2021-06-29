@@ -4,7 +4,7 @@ export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('TitleScene');
     this.dimensions;
-    this.mainAudio;
+    this.selectAudio;
     this.menus;
   }
 
@@ -24,8 +24,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   playSceneMusic() {
-    this.mainAudio = this.sound.add('bgAudio', { volume: 0.1, loop: true });
-    this.mainAudio.play();
+    this.selectAudio = this.sound.add('select', { volume: 0.2, loop: false });
   }
 
   buildMenu(dimensions) {
@@ -52,8 +51,11 @@ export default class TitleScene extends Phaser.Scene {
     let index = 0;
     this.menus.forEach(menuItem => {
       menuButtons[index].on('pointerup', () => {
-        menuItem.scene && this.scene.start(menuItem.scene);
-        if(menuItem.text === 'Exit') {
+        if (menuItem.scene) {
+          this.scene.start(menuItem.scene);
+          this.selectAudio.play();
+        }
+        else {
           this.game.destroy(true);
         }
       })

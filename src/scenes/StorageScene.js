@@ -6,6 +6,8 @@ export default class StorageScene extends Phaser.Scene {
   }
 
   create() {
+    const mainAudio = this.sound.add('bgAudio', { volume: 0.1, loop: true });
+    mainAudio.play();
     this.add.image(0,0,'sky').setOrigin(0);
     this.add.image(270, 200, 'title');
     const nameInput = this.add.dom(270, 550).createFromCache('form');

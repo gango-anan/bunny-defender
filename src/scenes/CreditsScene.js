@@ -32,6 +32,7 @@ export default class CreditsScene extends Phaser.Scene {
     .setScale(2.5)
     .setInteractive();
     backBtn.on('pointerup', () => {
+      this.sound.stopAll();
       this.scene.start('TitleScene')
     });
   }

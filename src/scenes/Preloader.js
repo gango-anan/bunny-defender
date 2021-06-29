@@ -3,6 +3,7 @@ import Phaser from "phaser";
 export default class Preloader extends Phaser.Scene {
   constructor() {
     super('Preloader');
+    this.ready = false;
   }
   
   preload() {
@@ -40,20 +41,23 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('buttons', 'assets/images/buttons.png');
     this.load.image('pauseBtn', 'assets/images/pause.png');
     this.load.image('backBtn', 'assets/images/back.png');
-    this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
     this.load.audio('explosion', 'assets/audio/explosion.mp3');
     this.load.audio('select', 'assets/audio/select.mp3');
     this.load.audio('hurt', 'assets/audio/hurt.mp3');
+    this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
     this.monitorProgressBar();
+  }
+
+  update() {
+    if(this.cache.audio.exists('bgAudio') && this.ready === false) {
+      this.ready = true;
+      this.scene.start('StorageScene');
+    }
   }
 
   monitorProgressBar() {
     for(let i = 0; i<500; i++) {
       this.load.image('logo'+i, 'assets/images/TitleImage.png');
     }
-  }
-
-  create() {
-    this.scene.start('StorageScene');
   }
 }

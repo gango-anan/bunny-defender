@@ -47,7 +47,8 @@ export default class LeaderBoard extends Phaser.Scene {
     .setScale(2.5)
     .setInteractive();
     backBtn.on('pointerup', () => {
-      this.scene.start('TitleScene')
+      this.sound.stopAll();
+      this.scene.start('TitleScene');
     });
   }
 

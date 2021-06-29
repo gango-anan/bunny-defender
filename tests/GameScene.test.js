@@ -3,11 +3,11 @@ import GameScene from '../src/scenes/GameScene'
 
 const gameScene = new GameScene();
 
-test('GameScene correctly initializes a Credits Scene object' , () => {
+test('GameScene correctly initializes a Game Scene object' , () => {
   expect(typeof gameScene).toBe('object');
 });
 
-test('GameScene correctly initializes a Credits Scene object' , () => {
+test('GameScene correctly initializes a Game Scene object' , () => {
   expect(typeof GameScene).not.toBe('undefined');
 });
 

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import RemoteStorage from '../RemoteStorage';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -313,8 +314,13 @@ export default class GameScene extends Phaser.Scene {
     this.saveBestScore();
     this.add.text(160, 380, "Game Over", { fontSize: '32px', fill: '#fff'});
     this.add.text(80, 480, `Your Score is: ${this.score}`, { fontSize: '32px', fill: '#fff'});
+
+    const usersRecentScore = JSON.parse(localStorage.getItem('currentUserScore'))
+    const remoteStorage = new RemoteStorage();
+    remoteStorage.sendScores(usersRecentScore.username, usersRecentScore.recordedScore)
+
     this.time.addEvent({
-      delay: 3000,
+      delay: 2000,
       callback: () => {
         this.scene.start('TitleScene')
       },

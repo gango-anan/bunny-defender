@@ -13,8 +13,9 @@ export default class RemoteStorage {
           headers: { Accept: 'application/json','Content-Type': 'application/json', },
         },
       );
-      const data = await response.json();
-      return data;
+
+      return response.json();
+       
     } catch (error) {
       return error
     }
@@ -26,7 +27,7 @@ export default class RemoteStorage {
           method: 'POST',
           headers: {
             Accept: 'application/json', 'Content-Type': 'application/json', },
-            body: JSON.stringify({user, score: Number(score), }),
+            body: JSON.stringify({user: user, score: Number(score),}),
         },
       );
       return newResult.json();

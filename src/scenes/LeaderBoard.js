@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import RemoteStorage from '../RemoteStorage';
 
 export default class LeaderBoard extends Phaser.Scene {
   constructor() {
@@ -17,32 +18,27 @@ export default class LeaderBoard extends Phaser.Scene {
   }
 
   displayBestScores() {
-    const allScores = JSON.parse(localStorage.getItem('scores'));
     const xCord = this.cameras.main.width;
     const yCord = this.cameras.main.height;
     this.add.text(xCord*0.5 - 170 , yCord*0.5 - 100, 'LEADER BOARD', { fontSize: '48px', fill: '#fff'});
-  
-    allScores.sort((a, b) => {
-      const recordedScoreA = a.recordedScore;
-      const recordedScoreB = b.recordedScore;
-      if (recordedScoreB < recordedScoreA) {
-        return -1;
-      }
-      if (recordedScoreB > recordedScoreA) {
-        return 1;
-      }
-      return 0;
-    });
+
+    const leaderBoard = new RemoteStorage();
+    const fetchedScores = leaderBoard.fetchScores();
 
     let stepper = 0;
-    if (allScores != null) {
-      for (let index = 0; allScores[index] && index < 5; index++) {
-        const scorePosition = [xCord*0.5 - 170, yCord*0.5 + stepper];
-        this.add.text(...scorePosition, `${allScores[index].username}: ${ allScores[index].recordedScore }`, { fontSize: '32px', fill: '#fff'})
-        .setOrigin(0,0);
-        stepper += 50;
+    fetchedScores.then((data) => {
+      const leadingScores = data.result
+      this.sortData(leadingScores);
+
+      if (leadingScores != null) {
+        for (let index = 0; leadingScores[index] && index < 5; index++) {
+          const scorePosition = [xCord*0.5 - 170, yCord*0.5 + stepper];
+          this.add.text(...scorePosition, `${leadingScores[index].user}: ${ leadingScores[index].score }`, { fontSize: '32px', fill: '#fff'})
+          .setOrigin(0,0);
+          stepper += 50;
+        }
       }
-    }
+    })
   }
 
   backButton() {
@@ -52,6 +48,20 @@ export default class LeaderBoard extends Phaser.Scene {
     .setInteractive();
     backBtn.on('pointerup', () => {
       this.scene.start('TitleScene')
+    });
+  }
+
+  sortData(data) {
+    data.sort((a, b) => {
+      const recordedScoreA = a.score;
+      const recordedScoreB = b.score;
+      if (recordedScoreB < recordedScoreA) {
+        return -1;
+      }
+      if (recordedScoreB > recordedScoreA) {
+        return 1;
+      }
+      return 0;
     });
   }
 

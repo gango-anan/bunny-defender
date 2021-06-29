@@ -16,7 +16,7 @@ export default class TitleScene extends Phaser.Scene {
       {scene: null, text: 'Exit'},
     ];
     this.dimensions = [this.game.renderer.width*0.5, this.game.renderer.height*0.5-100];
-    //this.playSceneMusic();
+    this.playSceneMusic();
     this.add.image(0, 0, 'sky').setOrigin(0,0);
     this.add.image(270, 200, 'title');
     this.buildMenu(this.dimensions);

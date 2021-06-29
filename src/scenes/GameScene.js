@@ -21,6 +21,7 @@ export default class GameScene extends Phaser.Scene {
     this.playerVelocity;
     this.userName;
     this.scores;
+    this.bulletSound;
   }
 
   create() {
@@ -213,6 +214,7 @@ export default class GameScene extends Phaser.Scene {
 
   fireBurst(x,y) {
     if(!this.gameover){
+      this.playExplosionSound();
       this.burst.emitParticleAt(x, y);
       this.burst.start(true, 1000, null, 20);
     }
@@ -261,6 +263,7 @@ export default class GameScene extends Phaser.Scene {
   setRockBulletCollision() {
     if (!this.gameover) {
       this.physics.add.collider(this.spaceRockGroup, this.bulletGroup, (rock, bullet) => {
+        this.playBulletSound();
         const rockBody = rock.body;
         const x = rockBody.x;
         const y = rockBody.y;
@@ -269,6 +272,16 @@ export default class GameScene extends Phaser.Scene {
         this.getScore();
       }, null, this);
     }
+  }
+
+  playExplosionSound() {
+    const explosionSound = this.sound.add('explosion', { volume: 0.1, loop: false });
+    explosionSound.play();
+  }
+
+  playBulletSound() {
+    this.bulletSound = this.sound.add('hurt', { volume: 0.1, loop: false });
+    this.bulletSound.play();
   }
 
   bunnyCollision(r, b) {
@@ -308,6 +321,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   gameOver() {
+    this.bulletSound.stop();
     this.physics.pause();
     this.player.setTint(0xee4824);
 

@@ -18,7 +18,7 @@ export default class TitleScene extends Phaser.Scene {
     this.dimensions = [this.game.renderer.width*0.5, this.game.renderer.height*0.5-100];
     this.playSceneMusic();
     this.add.image(0, 0, 'sky').setOrigin(0,0);
-    this.add.image(270, 200, 'title');
+    this.add.image(270, 170, 'title');
     this.buildMenu(this.dimensions);
     this.addRunningBunny();
   }
@@ -74,7 +74,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   addRunningBunny() {
-    const hoverSprite = this.add.sprite(270, 200, 'bunny');
+    const hoverSprite = this.add.sprite(270, 170, 'bunny');
     hoverSprite.setScale(0.8);
     this.anims.create({
       key: 'walk',

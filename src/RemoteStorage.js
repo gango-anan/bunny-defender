@@ -15,7 +15,7 @@ export default class RemoteStorage {
       );
 
       return response.json();
-       
+
     } catch (error) {
       return error
     }
@@ -33,7 +33,7 @@ export default class RemoteStorage {
       return newResult.json();
 
     } catch (error) {
-      return error.json();
+      return error
     }
   }
 }

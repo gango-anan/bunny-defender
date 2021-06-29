@@ -264,6 +264,7 @@ export default class GameScene extends Phaser.Scene {
     if (!this.gameover) {
       this.physics.add.collider(this.spaceRockGroup, this.bulletGroup, (rock, bullet) => {
         this.playBulletSound();
+        this.recycleBullet(bullet);
         const rockBody = rock.body;
         const x = rockBody.x;
         const y = rockBody.y;
@@ -272,6 +273,12 @@ export default class GameScene extends Phaser.Scene {
         this.getScore();
       }, null, this);
     }
+  }
+
+  recycleBullet(bullet) {
+    bullet.body.reset(0, 0);
+    bullet.active = false;
+    bullet.visible = false;
   }
 
   playExplosionSound() {
@@ -321,20 +328,24 @@ export default class GameScene extends Phaser.Scene {
   }
 
   gameOver() {
-    this.bulletSound.stop();
     this.physics.pause();
     this.player.setTint(0xee4824);
 
     this.saveBestScore();
-    this.add.text(160, 380, "Game Over", { fontSize: '32px', fill: '#fff'});
-    this.add.text(80, 480, `Your Score is: ${this.score}`, { fontSize: '32px', fill: '#fff'});
+    this.add.text(160, 250, "Game Over", { fontSize: '32px', fill: '#fff'});
+    this.add.text(90, 320, `Your Score is: ${this.score}`, { fontSize: '32px', fill: '#fff'});
 
     const usersRecentScore = JSON.parse(localStorage.getItem('currentUserScore'))
     const remoteStorage = new RemoteStorage();
-    remoteStorage.sendScores(usersRecentScore.username, usersRecentScore.recordedScore)
+    const sendFeedBack = remoteStorage.sendScores(usersRecentScore.username, usersRecentScore.recordedScore);
+    sendFeedBack.then((data) => {
+      if (data.message === 'Failed to fetch') {
+        this.add.text(60, 400, "     Can't save score,\n\nCheck your internet connection.", { fontSize: '24px', fill: '#fff'});
+      }
+    })
 
     this.time.addEvent({
-      delay: 2000,
+      delay: 10000,
       callback: () => {
         this.scene.start('TitleScene')
       },

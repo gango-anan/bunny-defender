@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bunny.png">
+	<SubTexture name="Bunny0" x="0" y="0" width="64" height="69" pivotX="0.6" pivotY="1.65" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny1" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny2" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny3" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny4" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny5" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny6" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny7" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny8" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny9" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny10" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny11" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny12" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny13" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny14" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny15" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny16" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny17" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny18" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny19" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny20" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny21" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny22" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny23" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny24" x="64" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny25" x="128" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny26" x="192" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny27" x="256" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny28" x="320" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny29" x="384" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny30" x="320" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny31" x="256" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny32" x="192" y="0" width="64" height="70"/>
+	<SubTexture name="Bunny33" x="128" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny34" x="64" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny35" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny36" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny37" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny38" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny39" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny40" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny41" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny42" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny43" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny44" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny45" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny46" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny47" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny48" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny49" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny50" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny51" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny52" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny53" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny54" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny55" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny56" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny57" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny58" x="0" y="0" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny59" x="448" y="0" width="0" height="0" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny60" x="448" y="0" width="60" height="58" frameX="-4" frameY="-12" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny61" x="0" y="70" width="61" height="56" frameX="-3" frameY="-14" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny62" x="61" y="70" width="63" height="59" frameX="-1" frameY="-11" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny63" x="124" y="70" width="64" height="63" frameX="0" frameY="-7" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny64" x="188" y="70" width="64" height="65" frameX="0" frameY="-5" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny65" x="252" y="70" width="64" height="68" frameX="0" frameY="-2" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny66" x="316" y="70" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny67" x="380" y="70" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny68" x="444" y="70" width="64" height="70"/>
+	<SubTexture name="Bunny69" x="0" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny70" x="64" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny71" x="128" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny72" x="192" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny73" x="256" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny74" x="320" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny75" x="384" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny76" x="448" y="140" width="64" height="70"/>
+	<SubTexture name="Bunny77" x="0" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny78" x="64" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny79" x="128" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny80" x="192" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny81" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny82" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny83" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny84" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny85" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny86" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny87" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny88" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny89" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny90" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny91" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny92" x="256" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny93" x="320" y="210" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny94" x="384" y="210" width="64" height="69" frameX="0" frameY="-1" frameWidth="64" frameHeight="70"/>
+	<SubTexture name="Bunny95" x="448" y="210" width="64" height="70"/>
+	<SubTexture name="Bunny96" x="0" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny97" x="64" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny98" x="128" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny99" x="192" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny100" x="256" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny101" x="320" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny102" x="384" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny103" x="448" y="280" width="64" height="70"/>
+	<SubTexture name="Bunny104" x="0" y="350" width="64" height="70"/>
+	<SubTexture name="Bunny105" x="64" y="350" width="64" height="70"/>
+	<SubTexture name="Bunny106" x="128" y="350" width="64" height="70"/>
+</TextureAtlas>

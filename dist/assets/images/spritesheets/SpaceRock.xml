@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="SpaceRock.png">
+	<SubTexture name="SpaceRock0" x="0" y="0" width="172" height="172" pivotX="86.35" pivotY="86.4" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock1" x="172" y="0" width="172" height="172" frameX="-2" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock2" x="344" y="0" width="173" height="172" frameX="0" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock3" x="517" y="0" width="172" height="173" frameX="-1" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock4" x="689" y="0" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock5" x="0" y="173" width="173" height="172" frameX="0" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock6" x="173" y="173" width="172" height="172" frameX="-1" frameY="-4" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock7" x="345" y="173" width="173" height="171" frameX="-2" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock8" x="518" y="173" width="172" height="172" frameX="-1" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock9" x="690" y="173" width="172" height="173" frameX="-3" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock10" x="0" y="346" width="172" height="172" frameX="-4" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock11" x="172" y="346" width="172" height="173" frameX="-2" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock12" x="344" y="346" width="172" height="172" frameX="-3" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock13" x="516" y="346" width="173" height="172" frameX="-3" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock14" x="689" y="346" width="173" height="173" frameX="-1" frameY="0" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock15" x="0" y="519" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock16" x="172" y="519" width="172" height="172" frameX="-2" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock17" x="344" y="519" width="173" height="172" frameX="0" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock18" x="517" y="519" width="172" height="173" frameX="-1" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock19" x="689" y="519" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock20" x="0" y="692" width="173" height="172" frameX="0" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock21" x="173" y="692" width="172" height="172" frameX="-1" frameY="-4" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock22" x="345" y="692" width="173" height="172" frameX="-2" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock23" x="518" y="692" width="171" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock24" x="689" y="692" width="172" height="173" frameX="-3" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock25" x="0" y="865" width="172" height="172" frameX="-4" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock26" x="172" y="865" width="172" height="173" frameX="-2" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock27" x="344" y="865" width="172" height="171" frameX="-3" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock28" x="516" y="865" width="173" height="172" frameX="-3" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock29" x="689" y="865" width="172" height="172" frameX="-2" frameY="0" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock30" x="0" y="1038" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock31" x="172" y="1038" width="172" height="172" frameX="-2" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock32" x="344" y="1038" width="173" height="172" frameX="0" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock33" x="517" y="1038" width="172" height="173" frameX="-1" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock34" x="689" y="1038" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock35" x="0" y="1211" width="173" height="172" frameX="0" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock36" x="173" y="1211" width="172" height="173" frameX="-1" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock37" x="345" y="1211" width="173" height="172" frameX="-2" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock38" x="518" y="1211" width="171" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock39" x="689" y="1211" width="172" height="173" frameX="-2" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock40" x="0" y="1384" width="172" height="172" frameX="-4" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock41" x="172" y="1384" width="172" height="173" frameX="-2" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock42" x="344" y="1384" width="172" height="171" frameX="-2" frameY="-3" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock43" x="516" y="1384" width="173" height="172" frameX="-3" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock44" x="689" y="1384" width="172" height="172" frameX="-2" frameY="0" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock45" x="0" y="1557" width="173" height="172" frameX="-1" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock46" x="173" y="1557" width="171" height="172" frameX="-3" frameY="-1" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock47" x="344" y="1557" width="172" height="173" frameX="-1" frameY="0" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock48" x="516" y="1557" width="173" height="173" frameX="0" frameY="-2" frameWidth="176" frameHeight="176"/>
+	<SubTexture name="SpaceRock49" x="689" y="1557" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
+</TextureAtlas>

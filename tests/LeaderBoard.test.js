@@ -1,7 +1,5 @@
 import LeaderBoard from '../src/scenes/LeaderBoard';
 
-const leaderBoard = new LeaderBoard();
-
 test('should sort the scores in ascending order', () => {
   const unSortedScores = [
     { user: 'Galiwango', score: 25 },
@@ -19,6 +17,6 @@ test('should sort the scores in ascending order', () => {
 
   expect(unSortedScores).not.toEqual(sortedScores);
 
-  leaderBoard.sortData(unSortedScores);
+  LeaderBoard.sortData(unSortedScores);
   expect(unSortedScores).toEqual(sortedScores);
 });

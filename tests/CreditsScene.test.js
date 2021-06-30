@@ -1,17 +1,17 @@
 import Phaser from 'phaser';
-import CreditsScene from '../src/scenes/CreditsScene'
+import CreditsScene from '../src/scenes/CreditsScene';
 
 const creditsScene = new CreditsScene();
 
-test('CreditsScene correctly initializes a Credits Scene object' , () => {
+test('CreditsScene correctly initializes a Credits Scene object', () => {
   expect(typeof creditsScene).toBe('object');
 });
 
-test('CreditsScene correctly initializes a Credits Scene object' , () => {
+test('CreditsScene correctly initializes a Credits Scene object', () => {
   expect(typeof CreditsScene).not.toBe('undefined');
 });
 
-test('CreditsScene is a function' , () => {
+test('CreditsScene is a function', () => {
   expect(typeof CreditsScene).toBe('function');
 });
 

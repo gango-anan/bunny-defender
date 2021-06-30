@@ -1,17 +1,17 @@
 import Phaser from 'phaser';
-import GameScene from '../src/scenes/GameScene'
+import GameScene from '../src/scenes/GameScene';
 
 const gameScene = new GameScene();
 
-test('GameScene correctly initializes a Game Scene object' , () => {
+test('GameScene correctly initializes a Game Scene object', () => {
   expect(typeof gameScene).toBe('object');
 });
 
-test('GameScene correctly initializes a Game Scene object' , () => {
+test('GameScene correctly initializes a Game Scene object', () => {
   expect(typeof GameScene).not.toBe('undefined');
 });
 
-test('GameScene is a function' , () => {
+test('GameScene is a function', () => {
   expect(typeof GameScene).toBe('function');
 });
 

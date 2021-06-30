@@ -1,23 +1,23 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('TitleScene');
-    this.dimensions;
-    this.selectAudio;
-    this.menus;
+    this.dimensions = null;
+    this.selectAudio = null;
+    this.menus = null;
   }
 
   create() {
     this.menus = [
-      {scene: 'GameScene', text: 'Play'},
-      {scene: 'CreditsScene', text: 'Credits'},
-      {scene: 'LeaderBoard', text: 'Leader Board'},
-      {scene: null, text: 'Exit'},
+      { scene: 'GameScene', text: 'Play' },
+      { scene: 'CreditsScene', text: 'Credits' },
+      { scene: 'LeaderBoard', text: 'Leader Board' },
+      { scene: null, text: 'Exit' },
     ];
-    this.dimensions = [this.game.renderer.width*0.5, this.game.renderer.height*0.5-100];
+    this.dimensions = [this.game.renderer.width * 0.5, this.game.renderer.height * 0.5 - 100];
     this.playSceneMusic();
-    this.add.image(0, 0, 'sky').setOrigin(0,0);
+    this.add.image(0, 0, 'sky').setOrigin(0, 0);
     this.add.image(270, 170, 'title');
     this.buildMenu(this.dimensions);
     this.addRunningBunny();
@@ -28,15 +28,15 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   buildMenu(dimensions) {
-    let menuButtons = [];
-    let menuLabels = [];
-    let stepUnit  = 0;
-    
-    this.menus.forEach(menuItem => {
+    const menuButtons = [];
+    const menuLabels = [];
+    let stepUnit = 0;
+
+    this.menus.forEach((menuItem) => {
       const menuPosition = [dimensions[0], dimensions[1] + stepUnit];
       const menuButton = this.add.image(...menuPosition, 'buttons')
-      .setDisplaySize(200, 50)
-      .setInteractive({useHandCursor: true});
+        .setDisplaySize(200, 50)
+        .setInteractive({ useHandCursor: true });
       menuButtons.push(menuButton);
       const menuLabel = this.add.text(...menuPosition, menuItem.text, { fontSize: '24px', fill: '#fff' }).setOrigin(0.5);
       menuLabels.push(menuLabel);
@@ -44,35 +44,34 @@ export default class TitleScene extends Phaser.Scene {
     });
 
     this.addButtonInteractions(menuButtons);
-    this.addButtonEvents(menuButtons, menuLabels);
+    TitleScene.addButtonEvents(menuButtons, menuLabels);
   }
 
   addButtonInteractions(menuButtons) {
     let index = 0;
-    this.menus.forEach(menuItem => {
+    this.menus.forEach((menuItem) => {
       menuButtons[index].on('pointerup', () => {
         if (menuItem.scene) {
           this.scene.start(menuItem.scene);
           this.selectAudio.play();
-        }
-        else {
+        } else {
           this.game.destroy(true);
         }
-      })
+      });
       index += 1;
     });
   }
 
-  addButtonEvents(menuButtons, menuLabels) {
-    for (let index = 0; index < menuButtons.length; index++) {
+  static addButtonEvents(menuButtons, menuLabels) {
+    for (let index = 0; index < menuButtons.length; index += 1) {
       menuButtons[index].on('pointerover', () => {
-        menuLabels[index].setStyle({fill: '#00ff00'});
+        menuLabels[index].setStyle({ fill: '#00ff00' });
       });
-  
+
       menuButtons[index].on('pointerout', () => {
-        menuLabels[index].setStyle({fill: '#fff'});
+        menuLabels[index].setStyle({ fill: '#fff' });
       });
-    }    
+    }
   }
 
   addRunningBunny() {
@@ -82,8 +81,8 @@ export default class TitleScene extends Phaser.Scene {
       key: 'walk',
       frameRate: 8,
       repeat: -1,
-      frames: this.anims.generateFrameNumbers('bunny', {frames: [0 , 1, 2, 3, 4, 5, 6, 7]})
-    })
+      frames: this.anims.generateFrameNumbers('bunny', { frames: [0, 1, 2, 3, 4, 5, 6, 7] }),
+    });
     hoverSprite.play('walk');
   }
-} 
+}

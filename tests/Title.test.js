@@ -1,17 +1,17 @@
 import Phaser from 'phaser';
-import Title from '../src/scenes/Title'
+import Title from '../src/scenes/Title';
 
 const titleScene = new Title();
 
-test('Title correctly initializes a Title Scene object' , () => {
+test('Title correctly initializes a Title Scene object', () => {
   expect(typeof titleScene).toBe('object');
 });
 
-test('Title correctly initializes a Title Scene object' , () => {
+test('Title correctly initializes a Title Scene object', () => {
   expect(typeof Title).not.toBe('undefined');
 });
 
-test('Title is a function' , () => {
+test('Title is a function', () => {
   expect(typeof Title).toBe('function');
 });
 

@@ -1,17 +1,17 @@
 import Phaser from 'phaser';
-import Preloader from '../src/scenes/Preloader'
+import Preloader from '../src/scenes/Preloader';
 
 const preloaderScene = new Preloader();
 
-test('Preloader correctly initializes a Preloader Scene object' , () => {
+test('Preloader correctly initializes a Preloader Scene object', () => {
   expect(typeof preloaderScene).toBe('object');
 });
 
-test('Preloader correctly initializes a Preloader Scene object' , () => {
+test('Preloader correctly initializes a Preloader Scene object', () => {
   expect(typeof Preloader).not.toBe('undefined');
 });
 
-test('Preloader is a function' , () => {
+test('Preloader is a function', () => {
   expect(typeof Preloader).toBe('function');
 });
 

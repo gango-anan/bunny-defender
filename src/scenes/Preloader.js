@@ -1,16 +1,16 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 export default class Preloader extends Phaser.Scene {
   constructor() {
     super('Preloader');
     this.ready = false;
   }
-  
+
   preload() {
-    const titleText = this.add.image(0, 0, 'titleImage').setOrigin(0,0);  
+    const titleText = this.add.image(0, 0, 'titleImage').setOrigin(0, 0);
     const progressBar = this.add.graphics();
-    const progressBox = this.add.graphics(); 
-    
+    const progressBox = this.add.graphics();
+
     progressBox.fillStyle(0x050511, 0.5);
     progressBox.fillRect(80, 600, 380, 50);
 
@@ -19,11 +19,11 @@ export default class Preloader extends Phaser.Scene {
       progressBar.fillStyle(0xff9200, 1);
       progressBar.fillRect(90, 612, 360 * value, 25);
     });
-    
+
     this.load.on('complete', () => {
-        progressBar.destroy();
-        progressBox.destroy();
-        titleText.destroy();
+      progressBar.destroy();
+      progressBox.destroy();
+      titleText.destroy();
     });
     this.load.html('form', 'assets/images/form.html');
     this.load.image('title', 'assets/images/TitleImage.png');
@@ -31,8 +31,8 @@ export default class Preloader extends Phaser.Scene {
     this.load.image('ghost', 'assets/images/ghost.png');
     this.load.image('hill', 'assets/images/hill.png');
     this.load.image('sky', 'assets/images/sky.png');
-    this.load.spritesheet('bunny', "assets/images/spritesheets/bunny.png", { frameHeight: 70, frameWidth: 64 });
-    this.load.atlasXML('bunnyAtlas', 'assets/images/spritesheets/bunny.png', 'assets/images/spritesheets/bunny.xml')
+    this.load.spritesheet('bunny', 'assets/images/spritesheets/bunny.png', { frameHeight: 70, frameWidth: 64 });
+    this.load.atlasXML('bunnyAtlas', 'assets/images/spritesheets/bunny.png', 'assets/images/spritesheets/bunny.xml');
     this.load.atlasXML('spaceRock', 'assets/images/spritesheets/SpaceRock.png', 'assets/images/spritesheets/SpaceRock.xml');
     this.load.image('explosion', 'assets/images/explosion.png');
     this.load.image('ghost', 'assets/images/ghost.png');
@@ -49,15 +49,15 @@ export default class Preloader extends Phaser.Scene {
   }
 
   update() {
-    if(this.cache.audio.exists('bgAudio') && this.ready === false) {
+    if (this.cache.audio.exists('bgAudio') && this.ready === false) {
       this.ready = true;
       this.scene.start('StorageScene');
     }
   }
 
   monitorProgressBar() {
-    for(let i = 0; i<500; i++) {
-      this.load.image('logo'+i, 'assets/images/TitleImage.png');
+    for (let i = 0; i < 500; i += 1) {
+      this.load.image(`logo${i}`, 'assets/images/TitleImage.png');
     }
   }
 }

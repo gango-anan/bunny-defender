@@ -14,16 +14,16 @@ const config = {
   backgroundColor: '#171642',
   parent: 'game-container',
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   scale: {
-    mode: Phaser.Scale.FIT
+    mode: Phaser.Scale.FIT,
   },
   physics: {
     default: 'arcade',
-    arcade: { debug: false, }
+    arcade: { debug: false },
   },
-  scene: [Boot, Preloader, StorageScene, TitleScene ,GameScene, CreditsScene, LeaderBoard]
-}
+  scene: [Boot, Preloader, StorageScene, TitleScene, GameScene, CreditsScene, LeaderBoard],
+};
 
-const game = new Phaser.Game(config);
+window.game = new Phaser.Game(config);

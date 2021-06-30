@@ -1,17 +1,17 @@
 import Phaser from 'phaser';
-import StorageScene from '../src/scenes/StorageScene'
+import StorageScene from '../src/scenes/StorageScene';
 
 const storageScene = new StorageScene();
 
-test('StorageScene correctly initializes a StorageScene object' , () => {
+test('StorageScene correctly initializes a StorageScene object', () => {
   expect(typeof storageScene).toBe('object');
 });
 
-test('StorageScene correctly initializes a StorageScene object' , () => {
+test('StorageScene correctly initializes a StorageScene object', () => {
   expect(typeof StorageScene).not.toBe('undefined');
 });
 
-test('StorageScene is a function' , () => {
+test('StorageScene is a function', () => {
   expect(typeof StorageScene).toBe('function');
 });
 

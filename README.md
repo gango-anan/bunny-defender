@@ -31,7 +31,7 @@ A player can always check on the Leaders Board to see how he/she is fairing.
 
 ## Live Demo
 
-[Live Demo Link]( )
+[Live Demo Link](https://angry-mcnulty-4774f2.netlify.app/)
 
 ## prerequisite
 You must have a live internet connection before you get started.

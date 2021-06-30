@@ -45,19 +45,12 @@ export default class Preloader extends Phaser.Scene {
     this.load.audio('select', 'assets/audio/select.mp3');
     this.load.audio('hurt', 'assets/audio/hurt.mp3');
     this.load.audio('bgAudio', 'assets/audio/bgm.mp3');
-    this.monitorProgressBar();
   }
 
   update() {
     if (this.cache.audio.exists('bgAudio') && this.ready === false) {
       this.ready = true;
       this.scene.start('StorageScene');
-    }
-  }
-
-  monitorProgressBar() {
-    for (let i = 0; i < 500; i += 1) {
-      this.load.image(`logo${i}`, 'assets/images/TitleImage.png');
     }
   }
 }

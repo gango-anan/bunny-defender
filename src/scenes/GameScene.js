@@ -193,7 +193,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   resetRock(rock) {
-    if (rock.y >= this.game.renderer.height - 100) {
+    if (rock.y >= this.game.renderer.height - 200) {
       this.reSpawnRock(rock);
     }
   }

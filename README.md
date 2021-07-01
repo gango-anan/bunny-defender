@@ -97,7 +97,7 @@ Galiwango Ananiya
 
 - GitHub: [@gango-anan](https://github.com/gango-anan) 
 - Twitter: [@gango_anan](https://twitter.com/gango_anan) 
-- LinkedIn: [@galiwango-ananiya](https://www.linkedin.com/in/galiwango-ananiya-0800821b4/) 
+- LinkedIn: [@galiwango-ananiya](https://www.linkedin.com/in/galiwango-ananiya/) 
 
 ## 🤝 Contributing
 
